@@ -111,10 +111,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
     ) external onlyManager {
         require(getStatus() != ManagedPortfolioStatus.Closed, "ManagedPortfolio: Cannot create loan when Portfolio is closed");
         uint256 repaymentDate = block.timestamp + loanDuration;
-        require(repaymentDate <= endDate, "ManagedPortfolio: Loan end date is greater than Portfolio end date");
-        if (repaymentDate > latestRepaymentDate) {
-            latestRepaymentDate = repaymentDate;
-        }
+        _onLoanRepaymentDateChange(repaymentDate);
         uint256 protocolFee = protocolConfig.protocolFee();
         uint256 managersPart = (managerFee * principalAmount * loanDuration) / YEAR / 10000;
         uint256 protocolsPart = (protocolFee * principalAmount * loanDuration) / YEAR / 10000;
@@ -221,6 +218,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         uint256 newTotalDebt,
         uint256 newRepaymentDate
     ) external onlyManager {
+        _onLoanRepaymentDateChange(newRepaymentDate);
         bulletLoans.updateLoanParameters(instrumentId, newTotalDebt, newRepaymentDate);
     }
 
@@ -230,12 +228,20 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         uint256 newRepaymentDate,
         bytes memory borrowerSignature
     ) external onlyManager {
+        _onLoanRepaymentDateChange(newRepaymentDate);
         bulletLoans.updateLoanParameters(instrumentId, newTotalDebt, newRepaymentDate, borrowerSignature);
     }
 
     function markLoanAsResolved(uint256 instrumentId) external onlyManager {
         defaultedLoansCount--;
         bulletLoans.markLoanAsResolved(instrumentId);
+    }
+
+    function _onLoanRepaymentDateChange(uint256 newRepaymentDate) private {
+        require(newRepaymentDate <= endDate, "ManagedPortfolio: Loan end date is greater than Portfolio end date");
+        if (newRepaymentDate > latestRepaymentDate) {
+            latestRepaymentDate = newRepaymentDate;
+        }
     }
 
     function _beforeTokenTransfer(
