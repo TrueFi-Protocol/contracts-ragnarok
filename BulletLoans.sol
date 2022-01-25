@@ -61,9 +61,10 @@ contract BulletLoans is ERC721, InitializableManageable, IBulletLoans {
     function repay(uint256 instrumentId, uint256 amount) external {
         require(_exists(instrumentId), "BulletLoans: Cannot repay non-existent loan");
         require(getStatus(instrumentId) == BulletLoanStatus.Issued, "BulletLoans: Can only repay issued loan");
-
         LoanMetadata storage loan = loans[instrumentId];
         loan.amountRepaid += amount;
+        require(loan.totalDebt >= loan.amountRepaid, "BulletLoans: Loan cannot be overpaid");
+
         if (loan.amountRepaid >= loan.totalDebt) {
             _changeLoanStatus(instrumentId, BulletLoanStatus.FullyRepaid);
         }
