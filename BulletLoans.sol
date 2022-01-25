@@ -65,7 +65,7 @@ contract BulletLoans is ERC721, InitializableManageable, IBulletLoans {
         LoanMetadata storage loan = loans[instrumentId];
         loan.amountRepaid += amount;
         if (loan.amountRepaid >= loan.totalDebt) {
-            loan.status = BulletLoanStatus.FullyRepaid;
+            _changeLoanStatus(instrumentId, BulletLoanStatus.FullyRepaid);
         }
         loan.underlyingToken.safeTransferFrom(msg.sender, ownerOf(instrumentId), amount);
         emit LoanRepaid(instrumentId, amount);
@@ -141,7 +141,7 @@ contract BulletLoans is ERC721, InitializableManageable, IBulletLoans {
         loan.repaymentDate = newRepaymentDate;
 
         if (loan.amountRepaid >= loan.totalDebt && loan.status == BulletLoanStatus.Issued) {
-            loan.status = BulletLoanStatus.FullyRepaid;
+            _changeLoanStatus(instrumentId, BulletLoanStatus.FullyRepaid);
         }
 
         emit LoanParametersChanged(instrumentId, newTotalDebt, newRepaymentDate);
@@ -170,7 +170,7 @@ contract BulletLoans is ERC721, InitializableManageable, IBulletLoans {
         loan.repaymentDate = newRepaymentDate;
 
         if (loan.amountRepaid >= loan.totalDebt && loan.status == BulletLoanStatus.Issued) {
-            loan.status = BulletLoanStatus.FullyRepaid;
+            _changeLoanStatus(instrumentId, BulletLoanStatus.FullyRepaid);
         }
 
         emit LoanParametersChanged(instrumentId, newTotalDebt, newRepaymentDate);
