@@ -14,9 +14,9 @@ import {InitializableManageable} from "./access/InitializableManageable.sol";
 contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721Receiver, IManagedPortfolio {
     using SafeERC20 for IERC20WithDecimals;
 
-    uint256 constant YEAR = 365 days;
+    uint256 internal constant YEAR = 365 days;
 
-    uint256[] _loans;
+    uint256[] private _loans;
 
     IERC20WithDecimals public underlyingToken;
     IBulletLoans public bulletLoans;

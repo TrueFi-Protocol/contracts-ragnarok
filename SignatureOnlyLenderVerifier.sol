@@ -6,9 +6,9 @@ import {SignatureValidator} from "./libs/SignatureValidator.sol";
 import {ILenderVerifier} from "./interfaces/ILenderVerifier.sol";
 
 contract SignatureOnlyLenderVerifier is EIP712, ILenderVerifier {
-    string constant DOMAIN_NAME = "TrueFi";
-    string constant DOMAIN_VERSION = "1.0";
-    bytes32 constant AGREEMENT_TYPEHASH = keccak256("Agreement(string confirmation)");
+    string internal constant DOMAIN_NAME = "TrueFi";
+    string internal constant DOMAIN_VERSION = "1.0";
+    bytes32 internal constant AGREEMENT_TYPEHASH = keccak256("Agreement(string confirmation)");
 
     string public depositMessage;
     bytes32 public immutable digest;

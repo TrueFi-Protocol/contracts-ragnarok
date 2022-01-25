@@ -11,7 +11,7 @@ import {IBorrowerSignatureVerifier} from "./interfaces/IBorrowerSignatureVerifie
 contract BulletLoans is ERC721, InitializableManageable, IBulletLoans {
     using SafeERC20 for IERC20;
 
-    uint256 nextId;
+    uint256 internal nextId;
     mapping(uint256 => LoanMetadata) public loans;
     IBorrowerSignatureVerifier public borrowerSignatureVerifier;
 
