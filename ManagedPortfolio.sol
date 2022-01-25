@@ -110,7 +110,6 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         uint256 repaymentAmount
     ) external onlyManager {
         require(getStatus() != ManagedPortfolioStatus.Closed, "ManagedPortfolio: Cannot create loan when Portfolio is closed");
-        require(block.timestamp < endDate, "ManagedPortfolio: Portfolio end date is in the past");
         uint256 repaymentDate = block.timestamp + loanDuration;
         require(repaymentDate <= endDate, "ManagedPortfolio: Loan end date is greater than Portfolio end date");
         if (repaymentDate > latestRepaymentDate) {
