@@ -1,0 +1,2 @@
+contracts/types/**/*.sol
+contracts/**/types/**/*.sol

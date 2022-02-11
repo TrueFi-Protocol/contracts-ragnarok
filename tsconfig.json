@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "build/*": ["build/*"],
+      "build": ["build"],
+      "contracts/*": ["build/types/*"],
+      "contracts": ["build/types", "build/types/factories"],
+      "scripts/*": ["scripts/*"],
+      "scripts": ["scripts"],
+      "utils/*": ["test/utils/*"],
+      "utils": ["test/utils"],
+      "fixtures/*": ["test/fixtures/*"],
+      "fixtures": ["test/fixtures"]
+    }
+  },
+  "files": ["./hardhat.config.ts"],
+  "exclude": [
+    "deploy"
+  ],
+  "include": [
+    "build",
+    "scripts",
+    "contracts",
+    "test",
+  ]
+}
