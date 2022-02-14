@@ -1,5 +1,5 @@
 {
-  "name": "truefi-contracts",
+  "name": "truefi-contracts-ragnarok",
   "version": "1.0.0",
   "description": "TrueFi Smart Contracts",
   "scripts": {
@@ -24,7 +24,7 @@
     "verify:sanity": "pnpm run verify:configs && bash ./spec/run.sh -s",
     "checks": "pnpm run lint && pnpm run typecheck && pnpm run test",
     "playground:ragnarok": "ts-node ./scripts/playground/ragnarok/run.ts",
-    "deploy:ragnarok": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts -o ragnarok.deployments.json",
+    "deploy:ragnarok": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts -o deployments.json",
     "deploy:dryrun": "pnpm run deploy:ragnarok -- --dry-run --yes",
     "slither": "./slither.sh",
     "coverage": "bash ./utils/bash/runCoverage.sh",

@@ -26,7 +26,7 @@ Install all required dependencies:
 pnpm install
 ```
 
-Then enter `packages/contracts` package.
+Then enter `packages/contracts-ragnarok` package.
 
 In order to compile the smart contracts run
 ```
