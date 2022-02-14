@@ -13,28 +13,28 @@ rule repayRevertsIfNonExistent() {
     assert lastReverted;
 }
 
-// rule allowAnyAddressToRepayIfPossibleToRepay() {
-//     uint256 instrumentID;
-//     require underlyingTokenGhost[instrumentID] == token;
-//     uint256 amount;
-//
-//     storage initialState = lastStorage;
-//     env e1;
-//     repay(e1, instrumentID, amount);
-//
-//     env e2;
-//     uint256 balanceOfSender = token.balanceOf(e2.msg.sender) at initialState;
-//     require e2.msg.sender != 0 && e2.msg.value == 0;
-//     require balanceOfSender >= amount;
-//     require token.allowance(e2.msg.sender, currentContract) >= amount;
-//     require balanceOfSender
-//         + token.balanceOf(currentContract)
-//         + token.balanceOf(ownerOf(instrumentID))
-//         <= max_uint;
-//     repay@withrevert(e2, instrumentID, amount);
-//
-//     assert !lastReverted;
-// }
+rule allowAnyAddressToRepayIfPossibleToRepay() {
+    uint256 instrumentID;
+    require underlyingTokenGhost[instrumentID] == token;
+    uint256 amount;
+
+    storage initialState = lastStorage;
+    env e1;
+    repay(e1, instrumentID, amount);
+
+    env e2;
+    uint256 balanceOfSender = token.balanceOf(e2.msg.sender) at initialState;
+    require e2.msg.sender != 0 && e2.msg.value == 0;
+    require balanceOfSender >= amount;
+    require token.allowance(e2.msg.sender, currentContract) >= amount;
+    require balanceOfSender
+        + token.balanceOf(currentContract)
+        + token.balanceOf(ownerOf(instrumentID))
+        <= max_uint;
+    repay@withrevert(e2, instrumentID, amount);
+
+    assert !lastReverted;
+}
 
 rule repayDecreasesUnpaidDebt() {
     uint256 instrumentID;

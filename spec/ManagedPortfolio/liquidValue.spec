@@ -52,21 +52,22 @@ rule liquidValueDecreasesWhenIssuingLoans() {
     assert liquidValue_new + principalAmount <= liquidValue_old;
 }
 
-// rule liquidValueIncreasesWhenLoansRepaid() {
-//     uint256 instrumentID;
-//     uint256 amount;
-//     uint256 liquidValue_old = liquidValue();
-//
-//     require bulletLoans.ownerOf(instrumentID) == currentContract;
-//
-//     env e;
-//     require e.msg.sender != currentContract;
-//     bulletLoans.repay(e, instrumentID, amount);
-//
-//     uint256 liquidValue_new = liquidValue();
-//
-//    assert liquidValue_old + amount == liquidValue_new;
-// }
+rule liquidValueIncreasesWhenLoansRepaid() {
+    uint256 instrumentID;
+    uint256 amount;
+    uint256 liquidValue_old = liquidValue();
+
+    require bulletLoans.ownerOf(instrumentID) == currentContract;
+    require underlyingTokenGhost[instrumentID] == token;
+
+    env e;
+    require e.msg.sender != currentContract;
+    bulletLoans.repay(e, instrumentID, amount);
+
+    uint256 liquidValue_new = liquidValue();
+
+   assert liquidValue_old + amount == liquidValue_new;
+}
 
 rule onlyWithdrawAndCreateLoanDecreaseLiquidValue(method f) {
     uint256 liquidValue_old = liquidValue();
