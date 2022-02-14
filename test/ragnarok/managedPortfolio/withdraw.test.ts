@@ -85,23 +85,4 @@ describe('ManagedPortfolio.withdraw', () => {
     await expect(portfolio.connect(lender).withdraw(parseShares(50), '0x')).to.emit(portfolio, 'Withdrawn')
       .withArgs(lender.address, parseShares(50), parseUSDC(50))
   })
-
-  it('withdraws uneven amounts of tokens', async () => {
-    // This test is here to demonstrate that an analogous function in frontend calculates the same values
-    const { portfolio, lender, token, depositIntoPortfolio, parseShares, timeTravel } = await loadFixture(managedPortfolioFixture)
-    await token.mint(lender.address, parseUSDC(4_000_000))
-
-    await depositIntoPortfolio(4_000_000, lender)
-    await token.mint(portfolio.address, parseUSDC(3_777_111.777777))
-
-    await timeTravel(YEAR + DAY)
-
-    expect(await token.balanceOf(portfolio.address)).to.equal(parseUSDC(7_777_111.777777))
-    await portfolio.connect(lender).withdraw(parseShares(1_000_000), '0x')
-    expect(await token.balanceOf(lender.address)).to.equal(parseUSDC(1_944_277.944444))
-
-    expect(await token.balanceOf(portfolio.address)).to.equal(parseUSDC(7_777_111.777777).sub(parseUSDC(1_944_277.944444)))
-    await portfolio.connect(lender).withdraw(parseShares(1_500_111.9977), '0x')
-    expect(await token.balanceOf(lender.address)).to.equal(parseUSDC(1_944_277.944444).add(parseUSDC(2_916_634.671324)))
-  })
 })
