@@ -14,6 +14,9 @@ methods {
     token.allowance(address, address) returns uint256 envfree
 
     transferFrom(address, address, uint256) => DISPATCHER
+
+    onERC721Received(address, address, uint256, bytes) returns bytes4 => AUTO
+    verify(address, uint256, uint256, uint256, bytes) returns bool => AUTO
 }
 
 use rule proxyFunctionsCannotBeCalledByNonManagerUsers

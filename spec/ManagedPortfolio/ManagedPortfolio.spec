@@ -25,9 +25,11 @@ methods {
     protocolConfig.protocolAddress() returns address envfree
     protocolConfig.protocolFee() returns uint256 envfree
 
-    isAllowed(address, uint256, bytes) returns bool => NONDET
     onERC721Received(address, address, uint256, bytes) returns bytes4 => DISPATCHER
-    transferFrom(address, address, uint256) returns bool => DISPATCHER(true)
+    transferFrom(address, address, uint256) returns bool => DISPATCHER
+
+    isAllowed(address, uint256, bytes) returns bool => AUTO
+    verify(address, uint256, uint256, uint256, bytes) returns bool => AUTO
 }
 
 use rule proxyFunctionsCannotBeCalledByNonManagerUsers
