@@ -19,8 +19,14 @@ contract Whitelist is Manageable, ILenderVerifier {
         return isWhitelisted[user];
     }
 
-    function setWhitelistStatus(address user, bool status) external onlyManager {
+    function setWhitelistStatus(address user, bool status) public onlyManager {
         isWhitelisted[user] = status;
         emit WhitelistStatusChanged(user, status);
+    }
+
+    function setWhitelistStatusForMany(address[] calldata addressesToWhitelist, bool status) external onlyManager {
+        for (uint256 i = 0; i < addressesToWhitelist.length; i++) {
+            setWhitelistStatus(addressesToWhitelist[i], status);
+        }
     }
 }

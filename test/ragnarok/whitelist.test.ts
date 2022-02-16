@@ -52,4 +52,36 @@ describe('Whitelist', () => {
       expect(await whitelist.isAllowed(lender.address, 0, '0x')).to.be.true
     })
   })
+
+  describe('setWhitelistStatusForMany', () => {
+    it('only manager can change status', async () => {
+      const { other, whitelist } = await loadFixture(fixture)
+      await expect(whitelist.connect(other).setWhitelistStatusForMany([], true)).to.be.revertedWith('Manageable: Caller is not the manager')
+    })
+
+    it('set multiple whitelisted', async () => {
+      const { whitelist } = await loadFixture(fixture)
+      const addressesToWhitelist = [Wallet.createRandom().address, Wallet.createRandom().address, Wallet.createRandom().address]
+
+      await whitelist.setWhitelistStatusForMany(addressesToWhitelist, true)
+      expect(await whitelist.isAllowed(addressesToWhitelist[0], 0, '0x')).to.be.true
+      expect(await whitelist.isAllowed(addressesToWhitelist[1], 0, '0x')).to.be.true
+      expect(await whitelist.isAllowed(addressesToWhitelist[2], 0, '0x')).to.be.true
+
+      await whitelist.setWhitelistStatusForMany(addressesToWhitelist, false)
+      expect(await whitelist.isAllowed(addressesToWhitelist[0], 0, '0x')).to.be.false
+      expect(await whitelist.isAllowed(addressesToWhitelist[1], 0, '0x')).to.be.false
+      expect(await whitelist.isAllowed(addressesToWhitelist[2], 0, '0x')).to.be.false
+    })
+
+    // skip intended as it takes ~20s to pass
+    it.skip('set plenty of addresses whitelisted', async () => {
+      const { whitelist } = await loadFixture(fixture)
+      const addressesToWhitelist = [...new Array(1000)].map(() => Wallet.createRandom().address)
+      await whitelist.setWhitelistStatusForMany(addressesToWhitelist, true)
+      for (let i = 0; i < addressesToWhitelist.length; i++) {
+        expect(await whitelist.isAllowed(addressesToWhitelist[i], 0, '0x')).to.be.true
+      }
+    }).timeout(120_000)
+  })
 })
