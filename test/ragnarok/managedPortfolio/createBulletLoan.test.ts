@@ -49,6 +49,20 @@ describe('ManagedPortfolio.createBulletLoan', () => {
       .to.be.revertedWith('ManagedPortfolio: Loan end date is greater than Portfolio end date')
   })
 
+  it.skip('cannot create a loan when a max loans number is reached', async () => {
+    const { portfolio, borrower, depositIntoPortfolio } = await loadFixture(managedPortfolioFixture)
+    await depositIntoPortfolio(1_000_000)
+
+    const maxLoansNumber = await portfolio.MAX_LOANS_NUMBER()
+    const loanArgs = [DAY, borrower.address, parseUSDC(5), parseUSDC(6)] as const
+
+    for (let i = 0; i < maxLoansNumber.toNumber(); i++) {
+      await portfolio.createBulletLoan(...loanArgs)
+    }
+
+    await expect(portfolio.createBulletLoan(...loanArgs)).to.be.revertedWith('ManagedPortfolio: Maximum loans number has been reached')
+  })
+
   it('only manager can create a loan', async () => {
     const { portfolio, borrower } = await loadFixture(managedPortfolioFixture)
 

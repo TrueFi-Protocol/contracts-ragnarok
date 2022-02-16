@@ -15,6 +15,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
     using SafeERC20 for IERC20WithDecimals;
 
     uint256 internal constant YEAR = 365 days;
+    uint256 public constant MAX_LOANS_NUMBER = 100;
 
     uint256[] private _loans;
 
@@ -110,6 +111,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         uint256 repaymentAmount
     ) external onlyManager {
         require(getStatus() != ManagedPortfolioStatus.Closed, "ManagedPortfolio: Cannot create loan when Portfolio is closed");
+        require(_loans.length < MAX_LOANS_NUMBER, "ManagedPortfolio: Maximum loans number has been reached");
         uint256 repaymentDate = block.timestamp + loanDuration;
         _onLoanRepaymentDateChange(repaymentDate);
         uint256 protocolFee = protocolConfig.protocolFee();
