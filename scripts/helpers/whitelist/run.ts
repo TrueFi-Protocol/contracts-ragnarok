@@ -1,12 +1,11 @@
 import { ManagedPortfolioFactory__factory } from '../../../build/types'
-import { providers, Wallet } from 'ethers'
 import { CliArgs, getCliArgs } from './cli'
 import { sendTransactionAndWait } from '../shared/sendTransactionAndWait'
-import { INFURA_KEY } from '../shared/constants'
+import { setupWallet } from '../shared/setupWallet'
 
 async function run (cliArgs: CliArgs) {
   const { privateKey, network, factoryAddress, addressToWhitelist } = cliArgs
-  const wallet = new Wallet(privateKey, new providers.InfuraProvider(network, INFURA_KEY))
+  const wallet = setupWallet(network, privateKey)
   const portfolioFactory = ManagedPortfolioFactory__factory.connect(factoryAddress, wallet)
 
   const transaction = await portfolioFactory.populateTransaction.setIsWhitelisted(addressToWhitelist, true)

@@ -27,7 +27,8 @@
     "deploy:dryrun": "pnpm run deploy -- --dry-run --yes",
     "slither": "./slither.sh",
     "coverage": "bash ./utils/bash/runCoverage.sh",
-    "whitelist": "ts-node ./scripts/helpers/whitelist/run.ts",
+    "whitelist:factory": "ts-node ./scripts/helpers/whitelist/run.ts",
+    "whitelist:global": "ts-node ./scripts/helpers/whitelistGlobalVerifier/run.ts",
     "bulletloan": "ts-node ./scripts/helpers/createBulletLoan/run.ts"
   },
   "author": "",

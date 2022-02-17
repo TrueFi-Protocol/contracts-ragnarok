@@ -11,7 +11,7 @@ export interface CliArgs {
 export function getCliArgs (): CliArgs {
   const parser = new ArgumentParser({
     description: 'Adds address to portfolio factory whitelist',
-    prog: 'pnpm run whitelist',
+    prog: 'pnpm run whitelist:factory',
   })
   parser.add_argument('-f', '--factory-address', {
     type: 'str',

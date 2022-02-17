@@ -21,3 +21,6 @@ coverageEnv
 .certora_*
 .last_confs
 resource_errors.json
+
+# Passed in scripts
+.whitelist.txt
