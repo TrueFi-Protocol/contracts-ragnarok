@@ -4,7 +4,7 @@ pragma solidity 0.8.10;
 import {ILenderVerifier} from "./interfaces/ILenderVerifier.sol";
 import {Manageable} from "./access/Manageable.sol";
 
-contract Whitelist is Manageable, ILenderVerifier {
+contract GlobalWhitelistLenderVerifier is Manageable, ILenderVerifier {
     mapping(address => bool) public isWhitelisted;
 
     constructor() Manageable(msg.sender) {}
