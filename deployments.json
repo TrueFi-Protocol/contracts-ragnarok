@@ -54,8 +54,8 @@
       "address": "0x73A32faCe84D5cbA8D98DB46b57458D26D9adC07"
     },
     "managedPortfolio": {
-      "txHash": "0x68d948dbb30ed6bf27cb7ed7f79e7a1da69fd883bec22e2dd3f4f19fe5613a01",
-      "address": "0x421c715877D7989f162D78037342D209E62E565e"
+      "txHash": "0xace87fc1b6ff28bae561a6e48e7f134d18bdc84e90b850e109ff6151dbcadc93",
+      "address": "0x100B15adc382bB6b1042c997d759d857dB8E8504"
     },
     "managedPortfolioFactory": {
       "txHash": "0x87a1abf09728ee308341a45a027b147591f4095b97ba6bb561e33663df8ab5c8",
@@ -76,6 +76,10 @@
     "mockUsdc": {
       "txHash": "0x2a3721b97f621d281e406e581cb373a405ebe53925b09111e67fd8cd03db8322",
       "address": "0x31c906B8DAE7cA4dFaeff29d171deA0B2cBE2A4a"
+    },
+    "globalWhitelistLenderVerifier": {
+      "txHash": "0xd220f783b8446c44ed7477deaa7f9986abeda84a9ca01c609c18be6438fd530b",
+      "address": "0xbC0f50Fb1f782982441c405890dC638e0CfAF0d9"
     }
   },
   "rinkeby": {

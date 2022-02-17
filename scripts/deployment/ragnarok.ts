@@ -7,6 +7,7 @@ import {
   SignatureOnlyLenderVerifier,
   WhitelistLenderVerifier,
   LoansReader,
+  GlobalWhitelistLenderVerifier,
 } from '../../build/artifacts'
 import {
   deployBulletLoans,
@@ -20,15 +21,16 @@ dotenv.config({
   path: `${__dirname}/.env`,
 })
 
-deploy({ verify: true }, (deployer, { networkName }) => {
+deploy({ verify: true }, (_, { networkName }) => {
   const borrowerVerifier = contract(BorrowerSignatureVerifier)
   const signatureLenderVerifier = contract(SignatureOnlyLenderVerifier, [config.managedPortfolio.depositMessage])
+  contract(GlobalWhitelistLenderVerifier)
+  contract(WhitelistLenderVerifier)
+  contract(LoansReader)
   const bulletLoans = deployBulletLoans(borrowerVerifier)
   const protocolConfig = deployProtocolConfig()
   const managedPortfolioImplementation = contract(ManagedPortfolio)
   const factory = deployManagedPortfolioFactory(bulletLoans, protocolConfig, managedPortfolioImplementation)
-  contract(WhitelistLenderVerifier)
-  contract(LoansReader)
 
   if (networkName !== 'mainnet') {
     const usdc = contract(MockUsdc)
