@@ -90,7 +90,6 @@ async function getWhitelistVerifier (whitelistContractAddress: string, wallet: W
   return whitelistVerfier
 }
 
-// TODO: display transaction costs and wallet balance
 async function run (cliArgs: CliArgs) {
   try {
     const { wallet, whitelistContractAddress, batchSize } = prepare(cliArgs)
