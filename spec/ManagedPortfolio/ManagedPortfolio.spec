@@ -117,17 +117,20 @@ definition PORTFOLIO_CLOSED() returns uint8 = 2;
 
 // GHOSTS
 
-ghost mapping (uint256 => address) underlyingTokenGhost;
+ghost mapping (uint256 => uint256) underlyingTokenGhost;
 ghost uint256 loansLengthGhost;
 ghost mapping (uint256 => uint256) loansGhost;
 ghost uint256 nextIdGhost;
 
 hook Sstore bulletLoans.loans[KEY uint256 instrumentID].underlyingToken address value STORAGE {
-    underlyingTokenGhost[instrumentID] = value;
+    uint256 _value = value;
+    uint256 __value = _value & to_uint256(max_address);
+    underlyingTokenGhost[instrumentID] = __value;
 }
 
 hook Sload address value bulletLoans.loans[KEY uint256 instrumentID].underlyingToken STORAGE {
-    require value == underlyingTokenGhost[instrumentID];
+    uint256 _value = value;
+    require (_value & to_uint256(max_address)) == underlyingTokenGhost[instrumentID];
 }
 
 hook Sstore _loans.(offset 0) uint256 length STORAGE {

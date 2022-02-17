@@ -133,7 +133,7 @@ ghost mapping (uint256 => bool) existsGhost {
     init_state axiom forall uint256 id. !existsGhost[id];
 }
 
-ghost mapping (uint256 => address) underlyingTokenGhost;
+ghost mapping (uint256 => uint256) underlyingTokenGhost;
 
 ghost mapping (uint256 => uint256) amountRepaidGhost;
 
@@ -158,11 +158,14 @@ hook Sload address owner _owners[KEY uint256 instrumentID] STORAGE {
 }
 
 hook Sstore loans[KEY uint256 instrumentID].underlyingToken address value STORAGE {
-    underlyingTokenGhost[instrumentID] = value;
+    uint256 _value = value;
+    uint256 __value = _value & to_uint256(max_address);
+    underlyingTokenGhost[instrumentID] = __value;
 }
 
 hook Sload address value loans[KEY uint256 instrumentID].underlyingToken STORAGE {
-    require value == underlyingTokenGhost[instrumentID];
+    uint256 _value = value;
+    require (_value & to_uint256(max_address)) == underlyingTokenGhost[instrumentID];
 }
 
 hook Sstore loans[KEY uint256 instrumentID].amountRepaid uint256 value STORAGE {
