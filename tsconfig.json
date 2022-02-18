@@ -16,6 +16,8 @@
       "scripts": ["scripts"],
       "utils/*": ["test/utils/*"],
       "utils": ["test/utils"],
+      "config/*": ["test/config/*"],
+      "config": ["test/config"],
       "fixtures/*": ["test/fixtures/*"],
       "fixtures": ["test/fixtures"]
     }
