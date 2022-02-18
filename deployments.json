@@ -248,6 +248,10 @@
     "loansReader": {
       "txHash": "0xcb59ab69a31f0d045b76feec9bb66ca5c6ef60fd1828ec2d4aca348a0a7ca6da",
       "address": "0x44aA5555dfF7879e9DadDB26B330eD984D406808"
+    },
+    "globalWhitelistLenderVerifier": {
+      "txHash": "0x84c4557823014746611fa48676ad9fba018267e4b5bea30ac06f1a44892780aa",
+      "address": "0xAe48bea8F3FC1696DC8ec75183705CeE1D071B05"
     }
   }
 }
