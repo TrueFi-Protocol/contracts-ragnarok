@@ -53,10 +53,12 @@ main() {
     setup_certora
 
     SANITY=''
+    FAIL_ON_FIRST=false
 
-    while getopts 's' flag; do
+    while getopts 'sf' flag; do
         case "${flag}" in
             s) SANITY='--rule_sanity' ;;
+            f) FAIL_ON_FIRST=true ;;
             *) exit 1 ;;
         esac
     done
@@ -78,11 +80,15 @@ main() {
     done
 
     for pid in $pids; do
-        wait $pid || let "RESULT=1"
+        wait -n || let "RESULT=1"
+
+        if [ $FAIL_ON_FIRST == true ] && [ "$RESULT" == "1" ]; then
+            exit 1
+        fi
     done
 
     if [ "$RESULT" == "1" ]; then
-       exit 1
+        exit 1
     fi
 }
 
