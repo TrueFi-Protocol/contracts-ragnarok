@@ -12,13 +12,15 @@ extract_json() {
 extract_version() {
     local text="$1"
 
+    BASH_REMATCH=""
     [[ "${text}" =~ [0-9\.]+ ]]
     echo "${BASH_REMATCH}"
 }
 
 setup_solc() {
     echo "Setting up solc..." >&2
-    local solc_version="$(extract_version "$(solc --version)")"
+    local solc_version=""
+    local solc_version="$(extract_version "$(solc --version)" || true)"
     local compiler_version="$(extract_version "$(extract_json .compiler.json version)")"
 
     echo "Found solc version ${solc_version} and Hardhat compiler version ${compiler_version}." >&2
@@ -32,7 +34,8 @@ setup_solc() {
 
 setup_certora() {
     echo "Setting up Certora..." >&2
-    local certora_version="$(extract_version "$(certoraRun --version)")"
+    local certora_version=""
+    local certora_version="$(extract_version "$(certoraRun --version)" || true)"
     local latest_version="$(extract_version "$(pip3 index versions certora-cli)")"
 
     echo "Found Certora version ${certora_version} and latest version ${latest_version}." >&2
@@ -40,56 +43,11 @@ setup_certora() {
         echo "Updating Certora version to ${latest_version}..." >&2
         pip3 install certora-cli --upgrade
     fi
-
-    if [[ -z "${CERTORAKEY}" ]]; then
-        echo "CERTORAKEY environment variable is empty." >&2
-        exit 1
-    fi
-    echo "Found CERTORAKEY environment variable." >&2
 }
 
 main() {
     setup_solc
     setup_certora
-
-    SANITY=''
-    FAIL_ON_FIRST=false
-
-    while getopts 'sf' flag; do
-        case "${flag}" in
-            s) SANITY='--rule_sanity' ;;
-            f) FAIL_ON_FIRST=true ;;
-            *) exit 1 ;;
-        esac
-    done
-
-    pids=""
-    RESULT=0
-
-    RE_VERIFIED_NOT_SANITY='.*Verified((?!_sanity).)*'
-    RE_VIOLATED_SANITY='.*Violated.*_sanity.*'
-
-    RE="(${RE_VERIFIED_NOT_SANITY})|(${RE_VIOLATED_SANITY})"
-
-    set -o pipefail
-    confs=$(find build -path '*/spec/*.conf')
-    for conf in $confs; do
-        ( certoraRun $conf $SANITY | perl -ne "print if not /${RE}/" ) &
-        pids="$pids $!"
-        sleep 15
-    done
-
-    for pid in $pids; do
-        wait -n || let "RESULT=1"
-
-        if [ $FAIL_ON_FIRST == true ] && [ "$RESULT" == "1" ]; then
-            exit 1
-        fi
-    done
-
-    if [ "$RESULT" == "1" ]; then
-        exit 1
-    fi
 }
 
 main "$@"
