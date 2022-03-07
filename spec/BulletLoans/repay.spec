@@ -24,9 +24,12 @@ rule allowAnyAddressToRepayIfPossibleToRepay() {
 
     env e2;
     uint256 balanceOfSender = token.balanceOf(e2.msg.sender) at initialState;
+    // Lack of assumptions below could cause ERC20 transfer (and therefore repay function)
+    // to revert for not relevant reasons
     require e2.msg.sender != 0 && e2.msg.value == 0;
     require balanceOfSender >= amount;
     require token.allowance(e2.msg.sender, currentContract) >= amount;
+    // Similarly, overflow would cause function call to revert for not relevant reasons
     require balanceOfSender
         + token.balanceOf(currentContract)
         + token.balanceOf(ownerOf(instrumentID))
@@ -86,6 +89,7 @@ rule repayTransfersTokensToPortfolio() {
 
     address borrower;
     address loanOwner = ownerOf(instrumentID);
+    // if borrower == loanOwner, having one repay the other would not change anyone's balance
     require borrower != loanOwner;
 
     uint256 userTokenBalance_old = token.balanceOf(borrower);
