@@ -6,6 +6,9 @@ const generatedConfigsDir = "./build/spec";
 const tokensList = "./spec/tokens.json";
 
 function generateConfigs() {
+  let branchName = process.env.BRANCH || "local";
+  branchName = branchName.replace(/\//g, "-");
+
   const configs = readdirSync(originalConfigsDir);
   const tokens = JSON.parse(readFileSync(tokensList, "utf8"));
 
@@ -26,11 +29,11 @@ function generateConfigs() {
         const newConfigName = (config.cache + "_" + tokenName + "_" + specName.replace(".spec", ".conf"));
 
         writeFileSync(`${generatedConfigsDir}/${newConfigName}`, JSON.stringify({
-            ...config,
-            files: [...config.files, token + ":MockToken"],
-            verify: [spec],
-            cache: config.cache + "_" + tokenName,
-          }));
+          ...config,
+          files: [...config.files, token + ":MockToken"],
+          verify: [spec],
+          cache: `ragnarok_${branchName}_${config.cache}_${tokenName}`
+        }));
       }
     }
   }
