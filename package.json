@@ -21,7 +21,7 @@
     "codechecks": "codechecks ../../codechecks.yml",
     "checks": "pnpm run lint && pnpm run typecheck && pnpm run test",
     "verify": "bash ./spec/verify.sh -f",
-    "verify:ci": "bash ./spec/verify.sh -s",
+    "verify:sanity": "bash ./spec/verify.sh -s",
     "playground": "ts-node ./scripts/playground/ragnarok/run.ts",
     "deploy": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts -o deployments.json",
     "deploy:dryrun": "pnpm run deploy -- --dry-run --yes",
