@@ -13,6 +13,7 @@ shift 1
 network='mainnet'
 args="$@"
 dry_run='false'
+force='false'
 
 while [[ "$@" ]]; do
   case "$1" in
@@ -24,6 +25,9 @@ while [[ "$@" ]]; do
       ;;
     --dry-run)
       dry_run='true'
+      ;;
+    --force)
+      force='true'
       ;;
     -?)
       # ignore
@@ -43,6 +47,14 @@ if [[ "${dry_run}" == 'false' ]]; then
         exit 1
     fi
 fi
+
+if [[ "${force}" == 'false' ]]; then
+    if [[ "$(pnpm ts-node spec/deployCheck.ts)" == 'false' ]]; then
+        echo "Error: The contracts are not fully formally verified. Please reenable missing formal verification or run with `-- --force`."
+        exit 1
+    fi
+fi
+
 # Skip prompt if PRIVATE_KEY variable already exists
 if [[ -z "$PRIVATE_KEY" ]]; then
   # Prompt the user for a PRIVATE_KEY without echoing to bash output.

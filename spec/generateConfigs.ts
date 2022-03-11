@@ -2,15 +2,19 @@ import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, rmSync
 
 const originalConfigsDir = "./spec/confs";
 const generatedConfigsDir = "./build/spec";
+const expectedDir = "./spec/expected";
 
-const tokensList = "./spec/tokens.json";
+const tokensPath = "./spec/tokens.json";
+const ignoreSpecPath = "./spec/ignoreSpec.json";
 
 function generateConfigs() {
+  const allSpec = process.env.ALL_SPEC === "true";
   let branchName = process.env.BRANCH || "local";
   branchName = branchName.replace(/\//g, "-");
 
   const configs = readdirSync(originalConfigsDir);
-  const tokens = JSON.parse(readFileSync(tokensList, "utf8"));
+  const tokens = JSON.parse(readFileSync(tokensPath, "utf8"));
+  const ignoreSpec = JSON.parse(readFileSync(ignoreSpecPath, "utf8"));
 
   if (existsSync(generatedConfigsDir)) {
     rmSync(generatedConfigsDir, { recursive: true, force: true });
@@ -27,11 +31,16 @@ function generateConfigs() {
         const tokenParts = token.split("/");
         const tokenName = tokenParts[tokenParts.length - 1].split(".")[0]
         const newConfigName = (config.cache + "_" + tokenName + "_" + specName.replace(".spec", ".conf"));
+        const expectedFileName = newConfigName.replace(".conf", ".json");
+        if (ignoreSpec.includes(expectedFileName) && !allSpec) {
+          continue;
+        }
 
         writeFileSync(`${generatedConfigsDir}/${newConfigName}`, JSON.stringify({
           ...config,
           files: [...config.files, token + ":MockToken"],
           verify: [spec],
+          expected_file: `${expectedDir}/${expectedFileName}`,
           cache: `ragnarok_${branchName}_${config.cache}_${tokenName}`
         }));
       }
