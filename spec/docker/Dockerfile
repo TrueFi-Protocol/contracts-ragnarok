@@ -20,12 +20,12 @@ RUN npm install -g pnpm@6.20.3
 
 WORKDIR /root
 
-ADD requirements.txt .
-RUN pip install -r requirements.txt
-
 ADD ./build/package-extracted-deps.json package.json
 ADD patches patches
 RUN pnpm install && rm package.json
+
+ADD ./build/requirements-frozen.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 ADD spec/docker/setup.sh .
 ADD .compiler.json .

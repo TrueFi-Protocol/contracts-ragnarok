@@ -54,9 +54,9 @@ main() {
             fi
         else
             echo "Killing $id" >&2
-            docker kill $id || true
+            docker kill $id 2>/dev/null || true
         fi
-        docker rm $id || true
+        docker rm $id 2>/dev/null || true
     done
 
     if [ "$RESULT" == "1" ]; then
