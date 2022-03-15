@@ -3,7 +3,7 @@ import { CliArgs, getCliArgs } from './cli'
 import { sendTransactionAndWait } from '../shared/sendTransactionAndWait'
 import { setupWallet } from '../shared/setupWallet'
 
-async function run (cliArgs: CliArgs) {
+async function run(cliArgs: CliArgs) {
   const { privateKey, network, factoryAddress, addressToWhitelist } = cliArgs
   const wallet = setupWallet(network, privateKey)
   const portfolioFactory = ManagedPortfolioFactory__factory.connect(factoryAddress, wallet)

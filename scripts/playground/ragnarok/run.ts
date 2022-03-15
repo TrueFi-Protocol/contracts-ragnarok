@@ -7,7 +7,7 @@ import { startGanache } from '../shared/startGanache'
 import { deployUsdc } from '../shared/tasks/deployUsdc'
 import { config } from './config'
 
-async function run () {
+async function run() {
   const provider = await startGanache()
   const owner = new Wallet(defaultAccounts[0].secretKey, provider)
   const protocol = new Wallet(defaultAccounts[1].secretKey, provider)

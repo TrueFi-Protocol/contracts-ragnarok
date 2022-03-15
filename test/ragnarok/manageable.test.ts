@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import { setupFixtureLoader } from 'test/setup'
 import { AddressZero } from '@ethersproject/constants'
 
-async function fixture ([manager, otherWallet]: Wallet[]) {
+async function fixture([manager, otherWallet]: Wallet[]) {
   const manageable = await new Manageable__factory(manager).deploy(manager.address)
 
   return { manageable, manager, otherWallet }

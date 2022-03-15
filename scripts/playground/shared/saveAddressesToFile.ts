@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs'
 
 type Addresses = Record<string, {address: string}>
 
-export function saveAddressesToFile (addresses: Addresses, deploymentsFile: string) {
+export function saveAddressesToFile(addresses: Addresses, deploymentsFile: string) {
   let deployments = {}
 
   try {

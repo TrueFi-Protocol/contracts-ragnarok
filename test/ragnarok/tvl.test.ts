@@ -27,7 +27,7 @@ describe('TVL', () => {
     const { factory, createPortfolio, manager, lenderVerifier, DEPOSIT_MESSAGE, token, wallet } = await loadFixture(managedPortfolioFactoryFixture)
     const token1 = await new MockUsdc__factory(wallet).deploy()
 
-    async function createPortfolioAndDeposit (underlyingToken: Ierc20) {
+    async function createPortfolioAndDeposit(underlyingToken: Ierc20) {
       const { portfolio } = await createPortfolio(underlyingToken.address)
       await underlyingToken.mint(manager.address, parseUSDC(1000))
       await underlyingToken.connect(manager).approve(portfolio.address, constants.MaxUint256)

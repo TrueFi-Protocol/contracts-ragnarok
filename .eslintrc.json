@@ -371,7 +371,11 @@
     ],
     "space-before-function-paren": [
       "error",
-      "always"
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
     ],
     "space-in-parens": [
       "error",

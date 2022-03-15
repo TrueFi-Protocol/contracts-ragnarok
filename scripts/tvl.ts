@@ -1,7 +1,7 @@
 import { ManagedPortfolioFactory } from 'build/types'
 import { BigNumber, Contract } from 'ethers'
 
-export async function tvl (portfolioFactory: ManagedPortfolioFactory) {
+export async function tvl(portfolioFactory: ManagedPortfolioFactory) {
   const portfolios = await portfolioFactory.getPortfolios()
   const balances = {}
   const tvl = {}

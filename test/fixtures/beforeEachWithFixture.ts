@@ -10,7 +10,7 @@ export const loadFixture = waffle.createFixtureLoader(
   proxyProvider,
 )
 
-export function beforeEachWithFixture (fixture: Fixture<void>) {
+export function beforeEachWithFixture(fixture: Fixture<void>) {
   proxyProvider.clearCallHistory()
   beforeEach(() => loadFixture(fixture))
 }

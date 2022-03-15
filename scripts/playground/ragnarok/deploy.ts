@@ -10,7 +10,7 @@ import {
 } from './tasks'
 import { MockUsdc } from 'build/types'
 
-export async function deploy (usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
+export async function deploy(usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
   const borrowerSignatureVerifier = await deployBorrowerSignatureVerifier(owner)
   const bulletLoans = await deployBulletLoans(owner, borrowerSignatureVerifier)
   const protocolConfig = await deployProtocolConfig(owner, protocol)

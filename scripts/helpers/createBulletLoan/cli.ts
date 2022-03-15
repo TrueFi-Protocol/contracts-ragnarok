@@ -8,7 +8,7 @@ export interface CliArgs {
   borrowerAddress: string,
 }
 
-export function getCliArgs (): CliArgs {
+export function getCliArgs(): CliArgs {
   const parser = new ArgumentParser({
     description: 'Creates bullet loan',
     prog: 'pnpm run bulletloan',

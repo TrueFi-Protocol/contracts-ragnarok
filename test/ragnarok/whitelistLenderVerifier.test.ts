@@ -10,7 +10,7 @@ import { AddressZero } from '@ethersproject/constants'
 import { expect } from 'chai'
 import { setupFixtureLoader } from 'test/setup'
 
-async function fixture ([lender, manager, deployer]: Wallet[]) {
+async function fixture([lender, manager, deployer]: Wallet[]) {
   const lenderVerifier = await new WhitelistLenderVerifier__factory(deployer).deploy()
   const token = await new MockUsdc__factory(manager).deploy()
   const portfolio = await deployBehindProxy(new ManagedPortfolio__factory(manager),

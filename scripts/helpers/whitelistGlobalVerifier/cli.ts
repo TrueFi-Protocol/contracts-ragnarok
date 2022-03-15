@@ -7,7 +7,7 @@ export interface CliArgs {
   batchSize?: number,
 }
 
-export function getCliArgs (): CliArgs {
+export function getCliArgs(): CliArgs {
   const parser = new ArgumentParser({
     description: 'Whitelists multiple addresses in GlobalWhitelistLenderVerifier contract',
     prog: 'pnpm run whitelist:global',

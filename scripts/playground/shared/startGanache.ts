@@ -4,7 +4,7 @@ import { providers, Wallet, utils, constants } from 'ethers'
 
 const PORT = 8545
 
-export function startGanache () {
+export function startGanache() {
   const server = ganache.server({
     accounts: defaultAccounts,
     gasLimit: 15_000_000,

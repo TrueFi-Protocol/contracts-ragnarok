@@ -5,7 +5,7 @@ import { setupFixtureLoader } from 'test/setup'
 import { deployBehindProxy } from 'utils'
 import { ONE_PERCENT } from 'utils/constants'
 
-export async function fixture ([manager, protocol, newProtocol]: Wallet[]) {
+export async function fixture([manager, protocol, newProtocol]: Wallet[]) {
   const config = await deployBehindProxy(new ProtocolConfig__factory(manager), 10 * ONE_PERCENT, protocol.address)
   return { config, manager, protocol, newProtocol }
 }

@@ -5,7 +5,7 @@ const callHistory = []
 
 const init = (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._init
 
-function patchCallHistory () {
+function patchCallHistory() {
   (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._node._vmTracer._vm.on('beforeMessage', (message) => {
     if (message.to) {
       callHistory.push({
@@ -16,7 +16,7 @@ function patchCallHistory () {
   })
 }
 
-function patchSkipGasCostCheck () {
+function patchSkipGasCostCheck() {
   const originalProcess = (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule.processRequest.bind(
     (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule,
   )
@@ -41,7 +41,7 @@ function patchSkipGasCostCheck () {
 }
 
 const proxyProvider = new Proxy(waffle.provider, {
-  get (target: any, name) {
+  get(target: any, name) {
     if (name === 'callHistory') {
       return callHistory
     }

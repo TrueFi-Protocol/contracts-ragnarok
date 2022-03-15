@@ -4,7 +4,7 @@ import { parseUnits } from 'ethers/lib/utils'
 import { config } from '../config'
 import { deployBehindProxy } from '../../shared/tasks/deployBehindProxy'
 
-export async function deployManagedPortfolio (owner: Wallet, token: Erc20, bulletLoans: BulletLoans, protocolConfig: ProtocolConfig, lenderVerifier: SignatureOnlyLenderVerifier) {
+export async function deployManagedPortfolio(owner: Wallet, token: Erc20, bulletLoans: BulletLoans, protocolConfig: ProtocolConfig, lenderVerifier: SignatureOnlyLenderVerifier) {
   return deployBehindProxy(new ManagedPortfolio__factory(owner),
     'ManagedPortfolio',
     'MPS',

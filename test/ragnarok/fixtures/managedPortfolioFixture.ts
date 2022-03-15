@@ -29,7 +29,7 @@ export enum ManagedPortfolioStatus {
   Closed,
 }
 
-export async function managedPortfolioFixture ([manager, protocolOwner, protocol, lender, lender2, lender3, _lender, borrower]: Wallet[]) {
+export async function managedPortfolioFixture([manager, protocolOwner, protocol, lender, lender2, lender3, _lender, borrower]: Wallet[]) {
   const DEPOSIT_MESSAGE = 'deposit message'
 
   const token = await new MockUsdc__factory(manager).deploy()

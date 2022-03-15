@@ -6,7 +6,7 @@ import { expect } from 'chai'
 import { setupFixtureLoader } from 'test/setup'
 import { signNewLoanParameters, MAGIC_VALUE } from 'utils'
 
-export async function borrowerSignatureVerifierFixture ([borrower, deployer]: Wallet[]) {
+export async function borrowerSignatureVerifierFixture([borrower, deployer]: Wallet[]) {
   const borrowerVerifier = await new BorrowerSignatureVerifier__factory(deployer).deploy()
   const erc1271verifier = await new Erc1271Verifier__factory(deployer).deploy()
 

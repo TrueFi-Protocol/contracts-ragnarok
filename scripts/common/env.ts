@@ -1,4 +1,4 @@
-export function env<T extends string | number | boolean> (name: string, defaultValue: T): T {
+export function env<T extends string | number | boolean>(name: string, defaultValue: T): T {
   if (typeof defaultValue === 'number') {
     return process.env[name] ? Number(process.env[name]) as unknown as T : defaultValue
   }

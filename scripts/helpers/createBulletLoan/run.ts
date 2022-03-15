@@ -8,7 +8,7 @@ const LOAN_DURATION = 7 * 24 * 60 * 60
 const PRINCIPAL_AMOUNT = utils.parseUnits('11', 6)
 const REPAYMENT_AMOUNT = utils.parseUnits('11.2', 6)
 
-async function run (cliArgs: CliArgs) {
+async function run(cliArgs: CliArgs) {
   const { privateKey, network, portfolioAddress, borrowerAddress } = cliArgs
   const wallet = new Wallet(privateKey, new providers.InfuraProvider(network, INFURA_KEY))
   const portfolio = ManagedPortfolio__factory.connect(portfolioAddress, wallet)

@@ -12,7 +12,7 @@ import { deployBehindProxy, extractArgFromTx, parseUSDC } from 'utils'
 import { MANAGED_PORTFOLIO_NAME, MANAGED_PORTFOLIO_SYMBOL, YEAR, ONE_PERCENT } from 'utils/constants'
 import { AddressZero } from '@ethersproject/constants'
 
-export async function managedPortfolioFactoryFixture ([protocolOwner, protocol, manager]: Wallet[]) {
+export async function managedPortfolioFactoryFixture([protocolOwner, protocol, manager]: Wallet[]) {
   const DEPOSIT_MESSAGE = 'deposit message'
 
   const bulletLoans = await deployBehindProxy(new BulletLoans__factory(protocolOwner), AddressZero)
@@ -25,14 +25,14 @@ export async function managedPortfolioFactoryFixture ([protocolOwner, protocol, 
   const extractPortfolioAddress = (pendingTx: Promise<ContractTransaction>) =>
     extractArgFromTx(pendingTx, [factory.address, 'PortfolioCreated', 'newPortfolio'])
 
-  async function extractCreationTimestamp (pendingTx: Promise<ContractTransaction>) {
+  async function extractCreationTimestamp(pendingTx: Promise<ContractTransaction>) {
     const tx = await pendingTx
     const receipt = await tx.wait()
     const creationTimestamp = (await waffle.provider.getBlock(receipt.blockHash)).timestamp
     return creationTimestamp
   }
 
-  function attemptCreatingPortfolio (sender: Wallet, underlyingToken = token.address) {
+  function attemptCreatingPortfolio(sender: Wallet, underlyingToken = token.address) {
     return factory.connect(sender).createPortfolio(
       MANAGED_PORTFOLIO_NAME,
       MANAGED_PORTFOLIO_SYMBOL,
@@ -44,7 +44,7 @@ export async function managedPortfolioFactoryFixture ([protocolOwner, protocol, 
     )
   }
 
-  async function createPortfolio (underlyingToken = token.address) {
+  async function createPortfolio(underlyingToken = token.address) {
     const tx = attemptCreatingPortfolio(manager, underlyingToken)
     const portfolioAddress = await extractPortfolioAddress(tx)
     const portfolio = new ManagedPortfolio__factory(manager).attach(portfolioAddress)

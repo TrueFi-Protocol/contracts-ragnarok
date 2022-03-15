@@ -5,7 +5,7 @@ import { signConfirmationMessage } from 'utils'
 import { MAGIC_VALUE } from 'utils/constants'
 import { setupFixtureLoader } from 'test/setup'
 
-async function fixture ([lender, deployer]: Wallet[]) {
+async function fixture([lender, deployer]: Wallet[]) {
   const DEPOSIT_MESSAGE = 'very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message'
   const lenderVerifier = await new SignatureOnlyLenderVerifier__factory(deployer).deploy(DEPOSIT_MESSAGE)
   const erc1271verifier = await new Erc1271Verifier__factory(deployer).deploy()

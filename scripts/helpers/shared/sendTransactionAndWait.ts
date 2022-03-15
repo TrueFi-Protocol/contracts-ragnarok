@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 import { PopulatedTransaction, Wallet, utils } from 'ethers'
 import readline from 'readline'
 
-export async function sendTransactionAndWait (wallet: Wallet, description: string, transaction: PopulatedTransaction) {
+export async function sendTransactionAndWait(wallet: Wallet, description: string, transaction: PopulatedTransaction) {
   console.log()
   await printTxStats(wallet, transaction, description)
   await waitForKeyPress()
@@ -13,7 +13,7 @@ export async function sendTransactionAndWait (wallet: Wallet, description: strin
   await tx.wait()
 }
 
-export function waitForKeyPress () {
+export function waitForKeyPress() {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -29,7 +29,7 @@ export function waitForKeyPress () {
   })
 }
 
-async function printTxStats (wallet: Wallet, transaction: PopulatedTransaction, description: string) {
+async function printTxStats(wallet: Wallet, transaction: PopulatedTransaction, description: string) {
   const gasLimit = await wallet.estimateGas(transaction)
   const gasPrice = await wallet.getGasPrice()
   const ethPrice = await getEthPriceUsd()
@@ -44,7 +44,7 @@ async function printTxStats (wallet: Wallet, transaction: PopulatedTransaction, 
   console.log(`Balance: $${balanceInUsd}, Ξ${balance}`)
 }
 
-async function getEthPriceUsd (): Promise<number> {
+async function getEthPriceUsd(): Promise<number> {
   try {
     const res = await fetch('https://api.coinpaprika.com/v1/tickers/eth-ethereum')
     const data = await res.json()

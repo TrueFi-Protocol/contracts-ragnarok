@@ -6,7 +6,7 @@ import { proxy } from '../../utils/proxy'
 import { MarsContract } from '../../utils/marsContract'
 import { Address } from 'ethereum-mars/build/src/symbols'
 
-export function deployBulletLoans (borrowerSignatureVerifier: MarsContract) {
+export function deployBulletLoans(borrowerSignatureVerifier: MarsContract) {
   const implementation = contract(BulletLoans)
   const initializeCalldata = borrowerSignatureVerifier[Address].map(verifier => encodeInitializeCall(BulletLoans__factory, verifier))
   return proxy(implementation, initializeCalldata)

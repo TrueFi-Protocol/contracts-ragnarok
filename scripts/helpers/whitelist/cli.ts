@@ -8,7 +8,7 @@ export interface CliArgs {
   network: Networkish,
 }
 
-export function getCliArgs (): CliArgs {
+export function getCliArgs(): CliArgs {
   const parser = new ArgumentParser({
     description: 'Adds address to portfolio factory whitelist',
     prog: 'pnpm run whitelist:factory',

@@ -21,26 +21,26 @@ const MULTICALL2_ADDRESS = '0x5ba1e12693dc8f9c48aad8770482f4739beed696'
 const ADDRESSES_PATH = path.join(__dirname, '.whitelist.txt')
 const DEFAULT_BATCH_SIZE = 1000
 
-function validateAddress (address: string, errorMessage: string) {
+function validateAddress(address: string, errorMessage: string) {
   if (!utils.isAddress(address)) {
     throw new Error(errorMessage)
   }
 }
 
-function prepare (cliArgs: CliArgs) {
+function prepare(cliArgs: CliArgs) {
   const { network, whitelistContractAddress, batchSize } = cliArgs
   validateAddress(whitelistContractAddress, 'Invalid Whitelist contract address')
   const wallet = setupWallet(network, process.env.PRIVATE_KEY)
   return { wallet, whitelistContractAddress, batchSize: batchSize ?? DEFAULT_BATCH_SIZE }
 }
 
-function readAddresses () {
+function readAddresses() {
   const addresses = fs.readFileSync(ADDRESSES_PATH).toString().split('\n')
   addresses.forEach((address, idx) => validateAddress(address, `Invalid Ethereum address: ${address} (line: ${idx})`))
   return addresses
 }
 
-async function whitelistAddresses (whitelistVerfier: GlobalWhitelistLenderVerifier, wallet: Wallet, addresses: string[], batchSize: number) {
+async function whitelistAddresses(whitelistVerfier: GlobalWhitelistLenderVerifier, wallet: Wallet, addresses: string[], batchSize: number) {
   const batchesNumber = Math.ceil(addresses.length / batchSize)
   for (let i = 0; i < batchesNumber; i++) {
     const start = i * batchSize
@@ -51,7 +51,7 @@ async function whitelistAddresses (whitelistVerfier: GlobalWhitelistLenderVerifi
   }
 }
 
-async function checkIfWhitelisted (whitelistVerfier: GlobalWhitelistLenderVerifier, addresses: string[], wallet: Wallet) {
+async function checkIfWhitelisted(whitelistVerfier: GlobalWhitelistLenderVerifier, addresses: string[], wallet: Wallet) {
   const globalWhitelistInterface = new utils.Interface(GlobalWhitelistLenderVerifierJson.abi)
   const multicallContract = new Contract(MULTICALL2_ADDRESS, new utils.Interface(MULTICALL2_ABI), wallet)
 
@@ -81,7 +81,7 @@ async function checkIfWhitelisted (whitelistVerfier: GlobalWhitelistLenderVerifi
   }
 }
 
-async function getWhitelistVerifier (whitelistContractAddress: string, wallet: Wallet) {
+async function getWhitelistVerifier(whitelistContractAddress: string, wallet: Wallet) {
   const whitelistVerfier = GlobalWhitelistLenderVerifier__factory.connect(whitelistContractAddress, wallet)
   const managerAddress = await whitelistVerfier.manager()
   if (wallet.address !== managerAddress) {
@@ -90,7 +90,7 @@ async function getWhitelistVerifier (whitelistContractAddress: string, wallet: W
   return whitelistVerfier
 }
 
-async function run (cliArgs: CliArgs) {
+async function run(cliArgs: CliArgs) {
   try {
     const { wallet, whitelistContractAddress, batchSize } = prepare(cliArgs)
     const addresses = readAddresses()

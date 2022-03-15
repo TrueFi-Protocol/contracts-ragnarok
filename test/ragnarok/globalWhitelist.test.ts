@@ -3,7 +3,7 @@ import { Wallet } from 'ethers'
 import { expect } from 'chai'
 import { setupFixtureLoader } from 'test/setup'
 
-export async function fixture ([deployer, lender]: Wallet[]) {
+export async function fixture([deployer, lender]: Wallet[]) {
   const globalWhitelist = await new GlobalWhitelistLenderVerifier__factory(deployer).deploy()
   return { globalWhitelist, deployer, lender }
 }

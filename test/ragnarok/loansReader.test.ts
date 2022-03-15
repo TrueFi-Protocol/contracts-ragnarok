@@ -6,7 +6,7 @@ import { BulletLoanStatus, managedPortfolioFixture } from './fixtures'
 import { parseUSDC, getTxTimestamp, extractArgFromTx } from 'utils'
 
 describe('LoansReader', () => {
-  async function fixture (wallets: Wallet[]) {
+  async function fixture(wallets: Wallet[]) {
     const portfolio = await managedPortfolioFixture(wallets)
     const reader = await new LoansReader__factory(wallets[0]).deploy()
     return { reader, ...portfolio }
@@ -15,7 +15,7 @@ describe('LoansReader', () => {
   const loadFixture = setupFixtureLoader()
 
   it('returns loans', async () => {
-    async function createAndGetLoan (duration: number, principalAmount: number, repaymentAmount: number, recipient: string) {
+    async function createAndGetLoan(duration: number, principalAmount: number, repaymentAmount: number, recipient: string) {
       const tx = portfolio.createBulletLoan(duration, recipient, parseUSDC(principalAmount), parseUSDC(repaymentAmount))
       const loanId = await extractArgFromTx(tx, [portfolio.address, 'BulletLoanCreated', 'id'])
       const loanCreationTimestamp = await getTxTimestamp(await tx, provider)

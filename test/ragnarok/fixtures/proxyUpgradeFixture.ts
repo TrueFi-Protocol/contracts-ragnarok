@@ -7,7 +7,7 @@ import {
 import { Wallet } from 'ethers'
 import { deployBehindProxy } from 'utils'
 
-export async function proxyUpgradeFixture ([manager, nonManager]: Wallet[]) {
+export async function proxyUpgradeFixture([manager, nonManager]: Wallet[]) {
   const proxy = await deployBehindProxy(new DummyV1__factory(manager))
   const v2Implementation = await new DummyV2__factory(manager).deploy()
   const v3Implementation = await new DummyV3__factory(manager).deploy()
