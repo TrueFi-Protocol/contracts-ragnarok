@@ -20,7 +20,7 @@ function patchSkipGasCostCheck () {
   const originalProcess = (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule.processRequest.bind(
     (waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule,
   )
-  ;(waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule.processRequest = async (
+  ;(waffle.provider as any)._hardhatNetwork.provider._wrapped._wrapped._wrapped._ethModule.processRequest = (
     method: string,
     params: any[],
   ) => {

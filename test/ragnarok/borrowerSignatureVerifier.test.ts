@@ -39,7 +39,7 @@ describe('BorrowerSignatureVerifier.verify', () => {
     })
   })
 
-  describe('uses EIP-1271 for contracts', async () => {
+  describe('uses EIP-1271 for contracts', () => {
     it('returns magic value for valid signature', async () => {
       const { borrowerVerifier, erc1271verifier, deployer } = await loadFixture(borrowerSignatureVerifierFixture)
 

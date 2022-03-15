@@ -27,7 +27,7 @@ export async function bulletLoansFixture ([owner, portfolio, borrower]: Wallet[]
     return extractArgFromTx(pendingTx, [bulletLoans.address, 'LoanCreated', 'instrumentId'])
   }
 
-  async function createLoan () {
+  function createLoan () {
     const createLoanTx = bulletLoans.connect(portfolio).createLoan(token.address, parseUSDC(5), parseUSDC(6), YEAR, borrower.address)
     return extractLoanId(createLoanTx)
   }
@@ -37,7 +37,7 @@ export async function bulletLoansFixture ([owner, portfolio, borrower]: Wallet[]
     return (await waffle.provider.getBlock(txReceipt.blockHash)).timestamp
   }
 
-  async function signNewParameters (wallet: Wallet, instrumentId: BigNumberish, newTotalDebt: BigNumberish, newRepaymentDate: BigNumberish) {
+  function signNewParameters (wallet: Wallet, instrumentId: BigNumberish, newTotalDebt: BigNumberish, newRepaymentDate: BigNumberish) {
     return signNewLoanParameters(wallet, borrowerVerifier.address, instrumentId, newTotalDebt, newRepaymentDate)
   }
 

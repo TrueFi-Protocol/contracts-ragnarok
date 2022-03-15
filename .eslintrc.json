@@ -351,6 +351,9 @@
       "error",
       "never"
     ],
+    "require-await": [
+      "error"
+    ],
     "semi": [
       "error",
       "never"

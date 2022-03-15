@@ -32,7 +32,7 @@ export async function managedPortfolioFactoryFixture ([protocolOwner, protocol, 
     return creationTimestamp
   }
 
-  async function attemptCreatingPortfolio (sender: Wallet, underlyingToken = token.address) {
+  function attemptCreatingPortfolio (sender: Wallet, underlyingToken = token.address) {
     return factory.connect(sender).createPortfolio(
       MANAGED_PORTFOLIO_NAME,
       MANAGED_PORTFOLIO_SYMBOL,

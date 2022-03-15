@@ -66,7 +66,7 @@ export async function managedPortfolioFixture ([manager, protocolOwner, protocol
     return (await waffle.provider.getBlock(txReceipt.blockHash)).timestamp
   }
 
-  const signMessage = async (wallet: Wallet, message: string) => signConfirmationMessage(wallet, lenderVerifier.address, message)
+  const signMessage = (wallet: Wallet, message: string) => signConfirmationMessage(wallet, lenderVerifier.address, message)
 
   const extractLoanId = (pendingTx: Promise<ContractTransaction>) =>
     extractArgFromTx(pendingTx, [portfolio.address, 'BulletLoanCreated', 'id'], [bulletLoans.address, 'Transfer', 'tokenId'])

@@ -1,6 +1,6 @@
 import { Wallet, BigNumberish } from 'ethers'
 
-export const signConfirmationMessage = async (wallet: Wallet, address: string, message: string) => {
+export const signConfirmationMessage = (wallet: Wallet, address: string, message: string) => {
   const domain = {
     name: 'TrueFi',
     version: '1.0',
@@ -16,7 +16,7 @@ export const signConfirmationMessage = async (wallet: Wallet, address: string, m
   return wallet._signTypedData(domain, types, value)
 }
 
-export const signNewLoanParameters = async (wallet: Wallet, address: string, instrumentId: BigNumberish, newTotalDebt: BigNumberish, newRepaymentDate: BigNumberish) => {
+export const signNewLoanParameters = (wallet: Wallet, address: string, instrumentId: BigNumberish, newTotalDebt: BigNumberish, newRepaymentDate: BigNumberish) => {
   const domain = {
     name: 'TrueFi',
     version: '1.0',

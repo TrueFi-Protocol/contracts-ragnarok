@@ -13,7 +13,7 @@ export async function sendTransactionAndWait (wallet: Wallet, description: strin
   await tx.wait()
 }
 
-export async function waitForKeyPress () {
+export function waitForKeyPress () {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
