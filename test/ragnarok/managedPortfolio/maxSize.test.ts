@@ -11,7 +11,7 @@ describe('ManagedPortfolio.maxSize', () => {
     const { portfolio, lender, depositIntoPortfolio } = await loadFixture(managedPortfolioFixture)
 
     await portfolio.setMaxSize(0)
-    return expect(depositIntoPortfolio(10, lender)).to.be.revertedWith('ManagedPortfolio: Portfolio is full')
+    await expect(depositIntoPortfolio(10, lender)).to.be.revertedWith('ManagedPortfolio: Portfolio is full')
   })
 
   it('allows deposit if total after deposit = maxSize', async () => {
