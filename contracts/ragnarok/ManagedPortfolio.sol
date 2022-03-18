@@ -84,6 +84,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
 
     function deposit(uint256 depositAmount, bytes memory metadata) external onlyOpened {
         require(lenderVerifier.isAllowed(msg.sender, depositAmount, metadata), "ManagedPortfolio: Lender is not allowed to deposit");
+        require(depositAmount >= 10**underlyingToken.decimals(), "ManagedPortfolio: Deposit amount is too small");
         totalDeposited += depositAmount;
         require(totalDeposited <= maxSize, "ManagedPortfolio: Portfolio is full");
 

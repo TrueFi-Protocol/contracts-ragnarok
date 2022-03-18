@@ -3,6 +3,7 @@ import { setupFixtureLoader } from 'test/setup'
 import { managedPortfolioFixture } from '../fixtures'
 import { parseUSDC } from 'utils'
 import { YEAR, DAY } from 'utils/constants'
+import { utils } from 'ethers'
 
 describe('ManagedPortfolio.deposit', () => {
   const loadFixture = setupFixtureLoader()
@@ -116,5 +117,15 @@ describe('ManagedPortfolio.deposit', () => {
     await expect(depositIntoPortfolio(10, lender))
       .to.emit(portfolio, 'Deposited')
       .withArgs(lender.address, parseUSDC(10))
+  })
+
+  it('requires minimum deposit amount', async () => {
+    const { portfolio, lender, token, signMessage, DEPOSIT_MESSAGE } = await loadFixture(managedPortfolioFixture)
+    await token.mint(lender.address, parseUSDC(10))
+    await token.connect(lender).approve(portfolio.address, parseUSDC(1))
+    const signature = await signMessage(lender, DEPOSIT_MESSAGE)
+    await expect(portfolio.connect(lender).deposit(1, signature)).to.be.revertedWith('ManagedPortfolio: Deposit amount is too small')
+    await portfolio.connect(lender).deposit(parseUSDC(1), signature)
+    expect(await portfolio.balanceOf(lender.address)).to.eq(utils.parseEther('1'))
   })
 })
