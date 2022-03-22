@@ -10,6 +10,10 @@ contract MockToken is ERC20 {
         return 6;
     }
 
+    function singleToken() external view returns (uint256) {
+        return 10**decimals();
+    }
+
     function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
         if (balanceOf(_msgSender()) < amount) {
             return false;

@@ -10,6 +10,10 @@ contract MockToken is ERC20 {
         return 6;
     }
 
+    function singleToken() external view returns (uint256) {
+        return 10**decimals();
+    }
+
     function mint(address receiver, uint256 amount) external {
         _mint(receiver, amount);
     }

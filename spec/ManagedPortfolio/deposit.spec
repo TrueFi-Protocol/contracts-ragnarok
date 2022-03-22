@@ -1,5 +1,9 @@
 import "ManagedPortfolio.spec"
 
+methods {
+    token.singleToken() returns uint256 envfree
+}
+
 rule depositsAreProhibitedAfterEndDate() {
     uint256 amount;
     bytes metadata;
@@ -9,6 +13,19 @@ rule depositsAreProhibitedAfterEndDate() {
 
     env e;
     require e.block.timestamp > endDate();
+    deposit@withrevert(e, amount, metadata);
+
+    assert lastReverted;
+}
+
+rule depositChecksSignificantAmount() {
+    uint256 amount;
+    bytes metadata;
+
+    require amount < token.singleToken();
+    require metadata.length <= 256;
+
+    env e;
     deposit@withrevert(e, amount, metadata);
 
     assert lastReverted;
@@ -32,7 +49,7 @@ rule depositTransfersToPortfolio() {
     assert portfolioBalance_new == portfolioBalance_old + amount;
 }
 
-rule depositIssuesPortfolioShareTokens() {
+rule depositDoesNotDecreasePortfolioShareTokens() {
     uint256 amount;
     bytes metadata;
     address lender;
@@ -48,7 +65,58 @@ rule depositIssuesPortfolioShareTokens() {
 
     uint256 lenderBalance_new = balanceOf(lender);
 
-    require lenderBalance_new != lenderBalance_old;
+    assert lenderBalance_new >= lenderBalance_old;
+}
+
+// A previous version of ManagedPortfolio was vulnerable to a decimals precision
+// rounding attack.
+//
+// For an underlyingToken with 18 decimals, suppose Eve calls MP.deposit(1 wei)
+// and then underlyingToken.transfer(MP, 1 Token).
+//
+// Then Alice's call of MP.deposit(1.9 Token) would only grant her 1 wei of shares,
+// and she would lose 0.45 Tokens to Eve when the total balance of 2.9 Tokens gets
+// split evenly by the total supply of 2 wei shares.
+//
+// This rule doesn't fully catch this decimals vuln, but it ensures that under reasonable
+// assumptions of the portfolio value, it's not possible to do the stronger exploit
+// variant:
+//
+// Suppose Eve calls MP.deposit(1 wei) and then underlyingToken.transfer(MP, 1 Token).
+// Then if Alice calls MP.deposit(0.9 Token), then she would receive zero shares.
+rule depositNonzeroToReasonableMPIncreasesPortfolioShareTokens() {
+    uint256 amount;
+    bytes metadata;
+    address lender;
+
+    require metadata.length <= 256;
+    // TODO loansLengthGhost <= 5;
+    require loansLengthGhost <= 1;
+
+    // Assume that:
+    //          10**token.decimals() >= MP.value() / MP.totalSupply()
+    //   weis per 1 underlying token >= <weis of underlying tokens per wei of shares>.
+    //
+    // That is, the portfolio's shares have not inflated so much that 1 wei of shares
+    // is now worth more than 1 full underlying Token.
+    //
+    // Without this assumption, it would be possible to deposit 1 full underlying token
+    // and receive no shares.
+    //
+    // Getting around this assumption requires an attacker to commit at least
+    // <minimum deposit in wei> * 10**token.decimals() == 10**(2 * token.decimals()) wei
+    env e1;
+    require totalSupply() * token.singleToken() >= value(e1);
+
+    uint256 lenderBalance_old = balanceOf(lender);
+
+    env e2;
+    require e2.block.timestamp == e1.block.timestamp;
+    require e2.msg.sender == lender;
+    deposit(e2, amount, metadata);
+
+    uint256 lenderBalance_new = balanceOf(lender);
+
     assert lenderBalance_new > lenderBalance_old;
 }
 
