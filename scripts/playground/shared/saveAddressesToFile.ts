@@ -7,13 +7,12 @@ export function saveAddressesToFile(addresses: Addresses, deploymentsFile: strin
 
   try {
     const fileContent = readFileSync(deploymentsFile)
-    const json = JSON.parse(fileContent.toString())
-    deployments = json
+    deployments = JSON.parse(fileContent.toString())
   } catch {
     console.log('File not found')
   }
 
   deployments['ganache'] = addresses
 
-  writeFileSync(deploymentsFile, JSON.stringify(deployments, null, 2))
+  writeFileSync(deploymentsFile, JSON.stringify(deployments, null, 2) + '\n')
 }
