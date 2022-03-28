@@ -12,6 +12,7 @@ methods {
     liquidValue() returns uint256 envfree
     manager() returns address envfree
     managerFee() returns uint256 envfree
+    singleToken() returns uint256 envfree
     totalDeposited() returns uint256 envfree
     totalSupply() returns uint256 envfree
 
@@ -21,6 +22,7 @@ methods {
 
     token.allowance(address, address) returns uint256 envfree
     token.balanceOf(address) returns uint256 envfree
+    token.singleToken() returns uint256 envfree
 
     protocolConfig.protocolAddress() returns address envfree
     protocolConfig.protocolFee() returns uint256 envfree
@@ -59,6 +61,23 @@ rule loansLengthGhostNeverDecreases(method f) {
 
     assert loansLengthGhost_new >= loansLengthGhost_old;
 }
+
+invariant totalSupplyIsZeroOrSignificantWhenNotClosed(env e)
+    getStatus(e) != PORTFOLIO_CLOSED() => (totalSupply() == 0 || totalSupply() >= singleToken())
+    filtered { f -> !isProxyFunction(f) } {
+        preserved deposit(uint256 amount, bytes data) with (env _e) {
+            require data.length <= 256;
+            require loansLengthGhost <= 5;
+        }
+        preserved updateLoanParameters(uint256 instrumentID, uint256 newTotalDebt, uint256 newRepaymentDate, bytes signature) with (env _e) {
+            require signature.length <= 256;
+            require loansLengthGhost <= 5;
+        }
+        preserved withdraw(uint256 amount, bytes data) with (env _e) {
+            require getStatus(_e) != PORTFOLIO_CLOSED();
+        }
+    }
+
 
 // maxSize
 

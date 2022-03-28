@@ -1,8 +1,6 @@
 import "ManagedPortfolio.spec"
 
-methods {
-    token.singleToken() returns uint256 envfree
-}
+use invariant totalSupplyIsZeroOrSignificantWhenNotClosed
 
 rule depositsAreProhibitedAfterEndDate() {
     uint256 amount;
@@ -84,13 +82,12 @@ rule depositDoesNotDecreasePortfolioShareTokens() {
 //
 // Suppose Eve calls MP.deposit(1 wei) and then underlyingToken.transfer(MP, 1 Token).
 // Then if Alice calls MP.deposit(0.9 Token), then she would receive zero shares.
-rule depositNonzeroToReasonableMPIncreasesPortfolioShareTokens() {
+rule depositToMPWithoutHyperinflationIncreasesPortfolioShareTokens() {
     uint256 amount;
     bytes metadata;
     address lender;
 
     require metadata.length <= 256;
-    // TODO loansLengthGhost <= 5;
     require loansLengthGhost <= 1;
 
     // Assume that:
@@ -104,9 +101,41 @@ rule depositNonzeroToReasonableMPIncreasesPortfolioShareTokens() {
     // and receive no shares.
     //
     // Getting around this assumption requires an attacker to commit at least
-    // <minimum deposit in wei> * 10**token.decimals() == 10**(2 * token.decimals()) wei
+    // <minimum deposit in wei shares> * 10**token.decimals() == 10**(decimals() + token.decimals()) wei
     env e1;
-    require totalSupply() * token.singleToken() >= value(e1);
+    require value(e1) <= totalSupply() * token.singleToken();
+
+    uint256 lenderBalance_old = balanceOf(lender);
+
+    env e2;
+    require e2.block.timestamp == e1.block.timestamp;
+    require e2.msg.sender == lender;
+    deposit(e2, amount, metadata);
+
+    uint256 lenderBalance_new = balanceOf(lender);
+
+    assert lenderBalance_new > lenderBalance_old;
+}
+
+rule depositToMPWithBoundedValueIncreasesPortfolioShareTokens() {
+    uint256 amount;
+    bytes metadata;
+    address lender;
+
+    require metadata.length <= 256;
+    require loansLengthGhost <= 1;
+
+    // Both assumptions are required and provide tight bounds:
+    // - without the totalSupply invariant, Certora could assume an insignificant value of
+    // totalSupply < 1 Token shares
+    // - without limiting value() to at or below 10^18 * 10^6, an attacker could still
+    // conceivably attack like thus:
+    //   1. deposit the minimum of 1 USDC for 10^18 wei shares
+    //   2. transfer 10^18 USDC to inflate the share value to (10^18 + 1) USDC / 10^18 wei shares
+    //   3. cause deposits of 1 USDC to mint 1 USDC * 10^18 wei shares / (10^18 + 1) USDC == 0 shares
+    env e1;
+    requireInvariant totalSupplyIsZeroOrSignificantWhenNotClosed(e1);
+    require value(e1) <= singleToken() * token.singleToken();
 
     uint256 lenderBalance_old = balanceOf(lender);
 
