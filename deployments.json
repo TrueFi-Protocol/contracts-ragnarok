@@ -80,6 +80,10 @@
     "globalWhitelistLenderVerifier": {
       "txHash": "0xd220f783b8446c44ed7477deaa7f9986abeda84a9ca01c609c18be6438fd530b",
       "address": "0xbC0f50Fb1f782982441c405890dC638e0CfAF0d9"
+    },
+    "mockWoo": {
+      "txHash": "0x20c3936a8984c0b46c0b49ea8acb0eba971dca391181bd1f272c198953304827",
+      "address": "0xBa23dA1d7518eC9925F37deD7eB33dd4Db9Be061"
     }
   },
   "rinkeby": {
