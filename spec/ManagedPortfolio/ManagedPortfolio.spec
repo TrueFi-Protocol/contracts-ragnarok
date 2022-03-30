@@ -64,7 +64,7 @@ rule loansLengthGhostNeverDecreases(method f) {
 
 invariant totalSupplyIsZeroOrSignificantWhenNotClosed(env e)
     getStatus(e) != PORTFOLIO_CLOSED() => (totalSupply() == 0 || totalSupply() >= singleToken())
-    filtered { f -> !isProxyFunction(f) } {
+    filtered { f -> !f.isFallback && !isProxyFunction(f) && !isProhibited(f) } {
         preserved deposit(uint256 amount, bytes data) with (env _e) {
             require data.length <= 256;
             require loansLengthGhost <= 5;
@@ -74,7 +74,7 @@ invariant totalSupplyIsZeroOrSignificantWhenNotClosed(env e)
             require loansLengthGhost <= 5;
         }
         preserved withdraw(uint256 amount, bytes data) with (env _e) {
-            require getStatus(_e) != PORTFOLIO_CLOSED();
+            require _e.block.timestamp == e.block.timestamp;
         }
     }
 
