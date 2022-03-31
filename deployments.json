@@ -234,8 +234,8 @@
       "address": "0x0ee612688e7b3B46def69fBD3C4165d036c9097B"
     },
     "managedPortfolio": {
-      "txHash": "0xda013399e9ba4d3306735f223a22de18de465a4282ba5c7f25771c55954524bc",
-      "address": "0x4E2f5202bf60b951310AFdC9679061e9db722474"
+      "txHash": "0x4cfe602b0b21775e656e004bee98f704adbe3e83d87b6ed0c7d3f6fc5a4be5a8",
+      "address": "0x7d738E64f278322a7eb1889753B9c528B74789f5"
     },
     "managedPortfolioFactory": {
       "txHash": "0x3ba7e8e8c1e8d397a9f89a10e5149bca22dfc69f127fc45851f23aea237885b2",
