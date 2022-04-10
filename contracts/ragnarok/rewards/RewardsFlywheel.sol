@@ -69,6 +69,14 @@ abstract contract RewardsFlywheel {
         }
     }
 
+    function initializeRewards() internal {
+        if (rewardsState.index == 0) {
+            // Rewards state uninitialized, so we initialize it
+            rewardsState.index = 1;
+            rewardsState.block = block.number.toUint32();
+        }
+    }
+
     function setRewardsToken(address token) internal {
         if (token != rewardsToken) {
             rewardsToken = token;
@@ -95,13 +103,6 @@ abstract contract RewardsFlywheel {
             // Update rewards rate and emit event
             rewardsRatePerBlock = rewardsRate;
             emit RewardsRateChanged(rewardsRate);
-
-            if (rewardsState.index == 0) {
-                // This is when we initialize rewards... if users enter the rewards flywheel in this block, they'll
-                // miss out on rewards until distributeRewardsFor is called for them since they'll have a rewards
-                // index of 0, which is considered uninitialized. By setting to 1 here, we avoid this scenario.
-                rewardsState.index == 1;
-            }
         }
     }
 

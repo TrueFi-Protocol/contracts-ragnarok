@@ -74,6 +74,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
     ) external initializer {
         InitializableManageable.initialize(_manager);
         ERC20Upgradeable.__ERC20_init(_name, _symbol);
+        initializeRewards();
         underlyingToken = _underlyingToken;
         bulletLoans = _bulletLoans;
         protocolConfig = _protocolConfig;
