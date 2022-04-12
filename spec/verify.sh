@@ -23,4 +23,4 @@ freeze_latest_pip_requirements <requirements.txt >./build/requirements-frozen.tx
 
 docker build -f spec/docker/Dockerfile . -t verify_ragnarok
 
-docker run --rm -e CERTORAKEY -e HOST_PWD="$(pwd)" -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/build:/root/build verify_ragnarok "$@"
+docker run --rm -e CERTORAKEY -e BRANCH -e ALL_SPEC -e HOST_PWD="$(pwd)" -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/build:/root/build verify_ragnarok "$@"

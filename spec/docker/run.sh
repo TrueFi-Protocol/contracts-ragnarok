@@ -38,7 +38,7 @@ main() {
     confs=$(find build -path '*/spec/*.conf')
     echo "Confs: \n $confs"  >&2>&2
     for conf in $confs; do
-        id=$(docker run -d -e CERTORAKEY -v $HOST_PWD/build:/root/build:ro --entrypoint certoraRun verify_ragnarok $conf $SANITY)
+        id=$(docker run -d -e CERTORAKEY -e BRANCH -e ALL_SPEC -v $HOST_PWD/build:/root/build:ro --entrypoint certoraRun verify_ragnarok $conf $SANITY)
         echo "Spawned $id"
         ids="$ids $id"
     done
