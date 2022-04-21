@@ -1,12 +1,12 @@
 import { setupFixtureLoader } from '../setup'
 import { expect } from 'chai'
 import { Wallet } from 'ethers'
-import { TwoWhitelistsVerifier__factory } from 'contracts/factories/TwoWhitelistsVerifier__factory'
-import { GlobalWhitelistLenderVerifier__factory } from 'contracts/factories/GlobalWhitelistLenderVerifier__factory'
-import { DsRegistryService__factory } from 'contracts/factories/DsRegistryService__factory'
+import { TwoWhitelistsVerifier__factory } from '../../build/types/factories/contracts/ragnarok/TwoWhitelistsVerifier__factory'
+import { GlobalWhitelistLenderVerifier__factory } from '../../build/types/factories/contracts/ragnarok/GlobalWhitelistLenderVerifier__factory'
+import { DSRegistryService__factory } from '../../build/types/factories/contracts/ragnarok/mocks/DSRegistryService__factory'
 
 export async function fixture([deployer, lender]: Wallet[]) {
-  const registryService = await new DsRegistryService__factory(deployer).deploy()
+  const registryService = await new DSRegistryService__factory(deployer).deploy()
   const globalWhitelistService = await new GlobalWhitelistLenderVerifier__factory(deployer).deploy()
   const lenderVerifier = await new TwoWhitelistsVerifier__factory(deployer).deploy(registryService.address, globalWhitelistService.address)
 

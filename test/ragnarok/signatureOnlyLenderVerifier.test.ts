@@ -1,4 +1,4 @@
-import { SignatureOnlyLenderVerifier__factory, Erc1271Verifier__factory } from 'contracts'
+import { SignatureOnlyLenderVerifier__factory, ERC1271Verifier__factory } from 'contracts'
 import { expect } from 'chai'
 import { Wallet } from 'ethers'
 import { signConfirmationMessage } from 'utils'
@@ -8,7 +8,7 @@ import { setupFixtureLoader } from 'test/setup'
 async function fixture([lender, deployer]: Wallet[]) {
   const DEPOSIT_MESSAGE = 'very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message 00 very long deposit message'
   const lenderVerifier = await new SignatureOnlyLenderVerifier__factory(deployer).deploy(DEPOSIT_MESSAGE)
-  const erc1271verifier = await new Erc1271Verifier__factory(deployer).deploy()
+  const erc1271verifier = await new ERC1271Verifier__factory(deployer).deploy()
   const digest = await lenderVerifier.digest()
 
   return { lenderVerifier, erc1271verifier, lender, deployer, digest, DEPOSIT_MESSAGE }

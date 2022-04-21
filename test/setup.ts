@@ -1,7 +1,6 @@
 import { MockProvider, Fixture } from 'ethereum-waffle'
 import { Wallet } from 'ethers'
 import { waffle } from 'hardhat'
-import './utils/hardhatPatches'
 
 type FixtureLoader = ReturnType<typeof waffle.createFixtureLoader>
 interface FixtureReturns {

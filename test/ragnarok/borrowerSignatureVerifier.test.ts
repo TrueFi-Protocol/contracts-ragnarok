@@ -1,5 +1,5 @@
 
-import { BorrowerSignatureVerifier__factory, Erc1271Verifier__factory } from 'contracts'
+import { BorrowerSignatureVerifier__factory, ERC1271Verifier__factory } from 'contracts'
 import { Wallet } from 'ethers'
 
 import { expect } from 'chai'
@@ -8,7 +8,7 @@ import { signNewLoanParameters, MAGIC_VALUE } from 'utils'
 
 export async function borrowerSignatureVerifierFixture([borrower, deployer]: Wallet[]) {
   const borrowerVerifier = await new BorrowerSignatureVerifier__factory(deployer).deploy()
-  const erc1271verifier = await new Erc1271Verifier__factory(deployer).deploy()
+  const erc1271verifier = await new ERC1271Verifier__factory(deployer).deploy()
 
   return { borrowerVerifier, erc1271verifier, borrower, deployer }
 }

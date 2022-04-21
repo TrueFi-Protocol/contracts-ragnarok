@@ -15,7 +15,7 @@
     "build:types": "typechain --target ethers-v5 --outDir build/types 'build/*.json' > /dev/null && echo 'Typechain generated'",
     "build:waffle": "pnpm run clean && pnpm run build:sol && pnpm run build:types && bash ./utils/bash/indexBuild.sh",
     "build:verify": "ts-node ./spec/generateConfigs.ts",
-    "build": "hardhat compile && bash ./utils/bash/indexBuild.sh",
+    "build": "pnpm run clean && hardhat compile && bash ./utils/bash/indexBuild.sh",
     "test": "mocha 'test/**/*.test.ts'",
     "test:gas-reporter": "REPORT_GAS=true hardhat test",
     "codechecks": "codechecks ../../codechecks.yml",
@@ -37,7 +37,7 @@
     "@codechecks/client": "0.1.13-beta-1",
     "@ethersproject/constants": "^5.5.0",
     "@ethersproject/providers": "5.5.1",
-    "@typechain/ethers-v5": "^6.0.5",
+    "@typechain/ethers-v5": "^10.0.0",
     "@types/argparse": "~2.0.10",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
@@ -48,8 +48,6 @@
     "chai": "^4.2.0",
     "dotenv": "~10.0.0",
     "eslint": "7.11.0",
-    "ethereum-waffle": "^3.4.0",
-    "ganache-core": "2.13.2",
     "hardhat-gas-reporter": "^1.0.7",
     "mocha": "^8.2.1",
     "node-fetch": "^2.6.1",
@@ -63,23 +61,25 @@
     "solidity-coverage": "0.7.16",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
-    "typechain": "^3.0.0",
     "typescript": "4.5.4"
   },
   "dependencies": {
+    "@ethereum-waffle/chai": "4.0.0-alpha.21",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "~4.4.0",
     "@openzeppelin/contracts-upgradeable": "~4.4.1",
+    "@typechain/hardhat": "^6.0.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
     "ethereum-mars": "^0.1.10",
-    "ethers": "5.5.1",
-    "hardhat": "^2.2.0",
-    "hardhat-typechain": "^0.3.5"
+    "ethereum-waffle": "4.0.0-alpha.21",
+    "ethers": "^5.6.2",
+    "hardhat": "^2.9.2",
+    "solc": "^0.8.12",
+    "ts-generator": "^0.1.1",
+    "typechain": "^8.0.0"
   },
   "resolutions": {
-    "ethereum-waffle/**/ganache-core": "^2.13.0",
-    "@ethereum-waffle/provider/ganache-core": "^2.13.0",
     "**/@resolver-engine/core": "^0.3.3"
   }
 }

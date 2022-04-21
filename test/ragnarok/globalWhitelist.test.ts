@@ -1,4 +1,4 @@
-import { GlobalWhitelistLenderVerifier__factory } from 'build/types/factories/GlobalWhitelistLenderVerifier__factory'
+import { GlobalWhitelistLenderVerifier__factory } from 'build/types'
 import { Wallet } from 'ethers'
 import { expect } from 'chai'
 import { setupFixtureLoader } from 'test/setup'

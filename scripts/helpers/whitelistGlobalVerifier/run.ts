@@ -1,5 +1,4 @@
-import { GlobalWhitelistLenderVerifier__factory } from '../../../build/types/factories/GlobalWhitelistLenderVerifier__factory'
-import { GlobalWhitelistLenderVerifier } from 'build/types/GlobalWhitelistLenderVerifier'
+import { GlobalWhitelistLenderVerifier, GlobalWhitelistLenderVerifier__factory } from 'build/types'
 import GlobalWhitelistLenderVerifierJson from '../../../build/GlobalWhitelistLenderVerifier.json'
 import { setupWallet } from '../shared/setupWallet'
 import { CliArgs, getCliArgs } from './cli'
