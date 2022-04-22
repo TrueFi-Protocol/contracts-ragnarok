@@ -1,4 +1,4 @@
-import { Ierc20, MockUsdc__factory } from 'build/types'
+import { MockUsdc__factory, MockUsdc } from 'build/types'
 import { expect } from 'chai'
 import { constants } from 'ethers'
 import { tvl } from 'scripts/tvl'
@@ -27,7 +27,7 @@ describe('TVL', () => {
     const { factory, createPortfolio, manager, lenderVerifier, DEPOSIT_MESSAGE, token, wallet } = await loadFixture(managedPortfolioFactoryFixture)
     const token1 = await new MockUsdc__factory(wallet).deploy()
 
-    async function createPortfolioAndDeposit(underlyingToken: Ierc20) {
+    async function createPortfolioAndDeposit(underlyingToken: MockUsdc) {
       const { portfolio } = await createPortfolio(underlyingToken.address)
       await underlyingToken.mint(manager.address, parseUSDC(1000))
       await underlyingToken.connect(manager).approve(portfolio.address, constants.MaxUint256)

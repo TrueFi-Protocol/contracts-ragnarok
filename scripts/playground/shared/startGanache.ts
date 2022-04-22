@@ -1,5 +1,5 @@
 import { defaultAccounts } from 'ethereum-waffle'
-import ganache from 'ganache-core'
+import ganache from 'ganache'
 import { providers, Wallet, utils, constants } from 'ethers'
 
 const PORT = 8545

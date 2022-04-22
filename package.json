@@ -48,6 +48,7 @@
     "chai": "^4.2.0",
     "dotenv": "~10.0.0",
     "eslint": "7.11.0",
+    "ganache": "^7.0.4",
     "hardhat-gas-reporter": "^1.0.7",
     "mocha": "^8.2.1",
     "node-fetch": "^2.6.1",
