@@ -20,7 +20,7 @@
     "test:gas-reporter": "REPORT_GAS=true hardhat test",
     "codechecks": "codechecks ../../codechecks.yml",
     "checks": "pnpm run lint && pnpm run typecheck && pnpm run test",
-    "verify": "bash ./spec/verify.sh -f",
+    "verify": "bash ./spec/verify.sh",
     "verify:sanity": "bash ./spec/verify.sh -s",
     "playground": "ts-node ./scripts/playground/ragnarok/run.ts",
     "deploy": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts -o deployments.json",
