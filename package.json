@@ -8,7 +8,7 @@
     "clean": "rm -rf ./build",
     "typecheck": "tsc --noEmit",
     "lint:sol": "solhint 'contracts/**/*.sol' && prettylint 'contracts/**/*.sol'",
-    "lint:ts": "eslint '{test,scripts}/**/*.ts' -c .eslintrc.typescript.js --cache",
+    "lint:ts": "eslint '{test,scripts}/**/*.ts' -c .eslintrc.json --cache",
     "lint": "pnpm run lint:sol && pnpm run lint:ts",
     "lint:fix": "prettier 'contracts/**/*.sol' --write --loglevel error && pnpm run lint:ts -- --fix",
     "build:sol": "waffle .waffle.json",
