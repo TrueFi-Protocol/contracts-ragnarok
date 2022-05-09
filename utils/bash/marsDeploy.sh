@@ -10,6 +10,7 @@ set -eu
 DEPLOY_SCRIPT="$1"
 shift 1
 
+PRIVATE_KEY=''
 network='mainnet'
 args="$@"
 dry_run='false'

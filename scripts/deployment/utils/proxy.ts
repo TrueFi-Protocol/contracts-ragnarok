@@ -9,4 +9,4 @@ export const proxy = <T extends MarsContract>(implementation: T, initializeCalld
     implementation[Name],
     implementation[ArtifactSymbol] as any,
     proxy[Address] as any,
-  ) as any).upgradeTo(implementation))(implementation, { noRedeploy: true }) as T
+  ) as any).upgradeTo(implementation))(implementation) as T
