@@ -327,5 +327,67 @@
       "address": "0xA9b7589f246830fa7cb9B0E292f2BF20a465d109",
       "multisig": false
     }
+  },
+  "goerli": {
+    "borrowerSignatureVerifier": {
+      "txHash": "0x04e50f4df8e2c28d4b7ed8b88d0cccd653298c179f50ecd9071d61e5d1d14c71",
+      "address": "0xd57B00b33fD79100500f91Ea6f8bbFfd789F9637",
+      "multisig": false
+    },
+    "signatureOnlyLenderVerifier": {
+      "txHash": "0x22542a8fe954a5fc05d9ce6c532723c339fc7dfb4187b58b32578c5871384340",
+      "address": "0xeb21340A38325B1a687A06b3F16bf25b885eC202",
+      "multisig": false
+    },
+    "globalWhitelistLenderVerifier": {
+      "txHash": "0x795cf30af591fe45176ee367e4159cd4d1162951782ba75eae839b7e6d00af20",
+      "address": "0xBE35b8d610DA28c271C975552Ccb639802774983",
+      "multisig": false
+    },
+    "whitelistLenderVerifier": {
+      "txHash": "0x4d223390f9cfb81ebef6191ebc125594092a1df1bfd3354d70320b5e9d77ad3b",
+      "address": "0xc62059Ff82A0352F2D090aAe7bB59D592B932DE6",
+      "multisig": false
+    },
+    "loansReader": {
+      "txHash": "0xa0d70bbee644f3e9cd0b3ee28e2432c09bbfe4b2a256f605e66313ee4bf9da38",
+      "address": "0x86b2FBd508c1CC3E847A734a95fe7511280BA247",
+      "multisig": false
+    },
+    "bulletLoans": {
+      "txHash": "0xdd6411350179c9ec5f262a407560165a441278eb75700d8b71f23fb0d9574af4",
+      "address": "0xBe5a7e1c8b50b4b71Ae303F5d725e8C033654611",
+      "multisig": false
+    },
+    "bulletLoans_proxy": {
+      "txHash": "0xd2d9fa4f7f6297ad3835345cc14be28db7a0c1e7f4ef801b1cdcc3a4e792a18b",
+      "address": "0x0e80e5f1fa470E08566226220c93fAebed0d2A5E",
+      "multisig": false
+    },
+    "protocolConfig": {
+      "txHash": "0x7c423b64979202ed00bf41ac2f7c192a40d7f860870cce98e1cc07b9aad36a57",
+      "address": "0xA1BFc0E6467e3c3FbD2cD81151713F53ab5c1146",
+      "multisig": false
+    },
+    "protocolConfig_proxy": {
+      "txHash": "0xa0bfa7b38f29695279c1995d8b0df28a2ced0fa7540b21ec720a081059700089",
+      "address": "0x9a23dF7Da6449E62ac04C55704b58E8970B8e35C",
+      "multisig": false
+    },
+    "managedPortfolio": {
+      "txHash": "0x96aba8b8c5088463a2237006d93635c933141b8b52f2e3d31fffbae968c2b03c",
+      "address": "0x041e396e49EE253659E4F9abfAd9e38Fbf298c93",
+      "multisig": false
+    },
+    "managedPortfolioFactory": {
+      "txHash": "0x65c8a9ef55024ace4f539ee0f3faf04439724fdc80fa6caf94c9a5fb9a826386",
+      "address": "0x3a36fCDE583f58B8D6AF3b0C1dcC3060A4fA66fD",
+      "multisig": false
+    },
+    "managedPortfolioFactory_proxy": {
+      "txHash": "0xf7667f0b8065fab09bfbc4f30d5275e1d664aca64c9d1f2323e65bc3e14f3579",
+      "address": "0x07F01624331CDEB045Af809231dd0C403097e5A4",
+      "multisig": false
+    }
   }
 }
