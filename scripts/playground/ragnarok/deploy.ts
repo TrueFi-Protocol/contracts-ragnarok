@@ -8,7 +8,7 @@ import {
   deploySignatureOnlyLenderVerifier,
   deployBorrowerSignatureVerifier,
 } from './tasks'
-import { MockUsdc } from 'build/types'
+import { MockUsdc } from '../../../build/types'
 
 export async function deploy(usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
   const borrowerSignatureVerifier = await deployBorrowerSignatureVerifier(owner)
@@ -20,13 +20,13 @@ export async function deploy(usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
   const managedPortfolioFactory = await deployManagedPortfolioFactory(owner, bulletLoans, protocolConfig)
 
   const addresses = {
-    BorrowerSignatureVerifier: { address: borrowerSignatureVerifier.address },
-    BulletLoans: { address: bulletLoans.address },
-    ProtocolConfig: { address: protocolConfig.address },
-    Manageable: { address: manageable.address },
-    SignatureOnlyLenderVerifier: { address: lenderVerifier.address },
-    ManagedPortfolio: { address: managedPortfolio.address },
-    ManagedPortfolioFactory: { address: managedPortfolioFactory.address },
+    borrowerSignatureVerifier: { address: borrowerSignatureVerifier.address },
+    bulletLoans_proxy: { address: bulletLoans.address },
+    protocolConfig: { address: protocolConfig.address },
+    manageable: { address: manageable.address },
+    signatureOnlyLenderVerifier: { address: lenderVerifier.address },
+    managedPortfolio: { address: managedPortfolio.address },
+    managedPortfolioFactory_proxy: { address: managedPortfolioFactory.address },
   }
   return addresses
 }
