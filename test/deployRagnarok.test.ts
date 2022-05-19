@@ -1,4 +1,4 @@
-import { MockUsdc__factory } from 'build/types'
+import { MockUsdc__factory } from 'contracts'
 import { expect } from 'chai'
 import { waffle } from 'hardhat'
 import { deploy } from 'scripts/playground/ragnarok/deploy'
