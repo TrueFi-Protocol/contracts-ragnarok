@@ -8,7 +8,7 @@ import { deployUsdc } from '../shared/tasks/deployUsdc'
 import { config } from './config'
 import { Web3Provider } from '@ethersproject/providers'
 
-export async function runRagnarok(overrideProvider?: Web3Provider) {
+export async function runRagnarok(overrideProvider?: Web3Provider, deploymentsFile?: string) {
   const provider = overrideProvider ?? await startGanache()
   const owner = new Wallet(defaultAccounts[0].secretKey, provider)
   const protocol = new Wallet(defaultAccounts[1].secretKey, provider)
@@ -19,6 +19,6 @@ export async function runRagnarok(overrideProvider?: Web3Provider) {
     Multicall: { address: multicall.address },
     MockUsdc: { address: usdc.address },
     ...ragnarokAddresses,
-  }, config.deploymentsFile)
+  }, deploymentsFile ?? config.deploymentsFile)
   console.log('\n' + 'Ragnarok deployment DONE 🌟')
 }
