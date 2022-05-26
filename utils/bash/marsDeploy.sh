@@ -1,6 +1,12 @@
 #!/bin/bash
 set -eu
 
+# Setting Infura or Alchemy key to use for convenience here
+export ALCHEMY_KEY="b6z-86kKNaug7BhH8ydkFinnj4ZKSXp9"
+
+# Setting Etherscan key to use for convenience here
+export ETHERSCAN_KEY="RPKYAHCE6R2YI7TRV51WS5N8R885RRNXG3"
+
 # Example usage:
 # $ ./utils/bash/marsDeploy.sh deploy/truefi.ts --network ropsten --dry-run
 # PRIVATE_KEY=0x123..64
@@ -10,7 +16,6 @@ set -eu
 DEPLOY_SCRIPT="$1"
 shift 1
 
-PRIVATE_KEY=''
 network='mainnet'
 args="$@"
 dry_run='false'
@@ -57,7 +62,7 @@ if [[ "${force}" == 'false' ]]; then
 fi
 
 # Skip prompt if PRIVATE_KEY variable already exists
-if [[ -z "$PRIVATE_KEY" ]]; then
+if [[ -z "${PRIVATE_KEY:-}" ]]; then
   # Prompt the user for a PRIVATE_KEY without echoing to bash output.
   # Then export PRIVATE_KEY to an environment variable that won't get
   # leaked to bash history.
@@ -69,8 +74,6 @@ if [[ -z "$PRIVATE_KEY" ]]; then
   read -s -p "PRIVATE_KEY=" PRIVATE_KEY
   export PRIVATE_KEY
 fi
-export INFURA_KEY="ec659e9f6af4425c8a13aeb0af9f2809"
-export ETHERSCAN_KEY="XQPPJGFR4J3I6PEISYEG4JPETFZ2EF56EX"
 
 # Log file name
 network_log="-${network}"
@@ -82,7 +85,7 @@ if [[ "${dry_run}" == 'true' ]]; then
 fi
 timestamp_log="-$(date +%s)"
 
-npx mars
+pnpm mars
 ts-node ${DEPLOY_SCRIPT} \
   --waffle-config ./.waffle.json \
   ${args} \
