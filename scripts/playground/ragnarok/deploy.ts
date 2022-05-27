@@ -18,6 +18,7 @@ export async function deploy(usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
   const lenderVerifier = await deploySignatureOnlyLenderVerifier(owner)
   const managedPortfolio = await deployManagedPortfolio(owner, usdc, bulletLoans, protocolConfig, lenderVerifier)
   const managedPortfolioFactory = await deployManagedPortfolioFactory(owner, bulletLoans, protocolConfig)
+  await managedPortfolioFactory.setIsWhitelisted(owner.address, true)
 
   const addresses = {
     borrowerSignatureVerifier: { address: borrowerSignatureVerifier.address },
