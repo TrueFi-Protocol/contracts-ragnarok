@@ -36,12 +36,12 @@ setup_certora() {
     echo "Setting up Certora..." >&2
     local certora_version=""
     local certora_version="$(extract_version "$(certoraRun --version)" || true)"
-    local latest_version="$(extract_version "$(pip3 index versions certora-cli)")"
+    local desired_version="3.1.0"
 
-    echo "Found Certora version ${certora_version} and latest version ${latest_version}." >&2
-    if [[ "${certora_version}" != "${latest_version}" ]]; then
-        echo "Updating Certora version to ${latest_version}..." >&2
-        pip3 install certora-cli --upgrade
+    echo "Found Certora version ${certora_version} and desired version ${desired_version}." >&2
+    if [[ "${certora_version}" != "${desired_version}" ]]; then
+        echo "Updating Certora version to ${desired_version}..." >&2
+        pip3 install certora-cli==${desired_version}
     fi
 }
 
