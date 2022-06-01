@@ -45,8 +45,9 @@ rule onlyMarkLoanAsResolvedCanUndefaultLoan(method f) {
     env e;
     callFunction(f, e);
 
+    bool statement = getStatus(instrumentID) != LOAN_DEFAULTED();
     ifEffectThenFunction(
-        getStatus(instrumentID) != LOAN_DEFAULTED(),
+        statement,
         f.selector == markLoanAsResolved(uint256).selector
     );
     assert true;

@@ -17,8 +17,9 @@ rule onlyMarkLoanAsDefaultedChangesLoanStatusToDefaulted(method f) {
     env e;
     callFunction(f, e);
 
+    bool statement = bulletLoans.getStatus(instrumentID) == LOAN_DEFAULTED();
     ifEffectThenFunction(
-        bulletLoans.getStatus(instrumentID) == LOAN_DEFAULTED(),
+        statement,
         f.selector == markLoanAsDefaulted(uint256).selector
     );
 

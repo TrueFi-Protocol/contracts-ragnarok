@@ -131,8 +131,9 @@ rule onlyMarkLoanAsDefaultedChangesStatusFromIssuedToDefaulted(method f) {
     env e;
     callFunction(f, e);
 
+    bool statement = getStatus(instrumentID) == LOAN_DEFAULTED();
     ifEffectThenFunction(
-        getStatus(instrumentID) == LOAN_DEFAULTED(),
+        statement,
         f.selector == markLoanAsDefaulted(uint256).selector
     );
     assert true;

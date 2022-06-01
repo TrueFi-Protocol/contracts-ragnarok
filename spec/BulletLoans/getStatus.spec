@@ -29,8 +29,9 @@ rule onlyRepayOrUpdateLoanParametersChangeStatusToFullyRepaid(method f) {
     env e;
     callFunction(f, e);
 
+    bool statement = getStatus(instrumentID) == LOAN_FULLY_REPAID();
     ifEffectThenFunction(
-        getStatus(instrumentID) == LOAN_FULLY_REPAID(),
+        statement,
         f.selector == repay(uint256,uint256).selector ||
         f.selector == updateLoanParameters(uint256,uint256,uint256).selector ||
         f.selector == updateLoanParameters(uint256,uint256,uint256,bytes).selector
