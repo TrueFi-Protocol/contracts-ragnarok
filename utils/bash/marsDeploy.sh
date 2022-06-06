@@ -56,7 +56,7 @@ fi
 
 if [[ "${force}" == 'false' ]]; then
     if [[ "$(pnpm ts-node spec/deployCheck.ts)" == 'false' ]]; then
-        echo "Error: The contracts are not fully formally verified. Please reenable missing formal verification or run with `-- --force`."
+        echo 'Error: The contracts are not fully formally verified. Please reenable missing formal verification or run with `-- --force`.'
         exit 1
     fi
 fi
