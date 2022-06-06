@@ -93,7 +93,10 @@ describe('ManagedPortfolio.createBulletLoan', () => {
     await portfolio.createBulletLoan(DAY, borrower.address, parseUSDC(3), parseUSDC(6))
     await portfolio.createBulletLoan(DAY, borrower.address, parseUSDC(3), parseUSDC(6))
 
-    expect(await portfolio.getOpenLoanIds()).to.deep.equal([BigNumber.from(0), BigNumber.from(1)])
+    const [loanId0, loanId1] = await portfolio.getOpenLoanIds()
+
+    expect(loanId0).to.equal(BigNumber.from(0))
+    expect(loanId1).to.equal(BigNumber.from(1))
   })
 
   it('can be created even after another loan has defaulted', async () => {

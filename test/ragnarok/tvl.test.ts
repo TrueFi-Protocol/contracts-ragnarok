@@ -20,7 +20,11 @@ describe('TVL', () => {
     await token.mint(manager.address, parseUSDC(1000))
     await token.connect(manager).approve(portfolio.address, constants.MaxUint256)
     await portfolio.deposit(parseUSDC(1000), await signConfirmationMessage(manager, lenderVerifier.address, DEPOSIT_MESSAGE), { gasLimit: 999999 })
-    expect(await tvl(factory)).to.deep.eq({ [token.address]: parseUSDC(1000) })
+
+    const tvlEntries = await tvl(factory)
+
+    expect(tvlEntries).to.have.property(token.address)
+      .that.eq(parseUSDC(1000))
   })
 
   it('multiple tokens', async () => {
@@ -39,6 +43,12 @@ describe('TVL', () => {
     await createPortfolioAndDeposit(token)
     await createPortfolioAndDeposit(token)
     await createPortfolioAndDeposit(token1)
-    expect(await tvl(factory)).to.deep.eq({ [token.address]: parseUSDC(4000), [token1.address]: parseUSDC(1000) })
+
+    const tvlEntries = await tvl(factory)
+
+    expect(tvlEntries).to.have.property(token.address)
+      .that.eq(parseUSDC(4000))
+    expect(tvlEntries).to.have.property(token1.address)
+      .that.eq(parseUSDC(1000))
   })
 })
