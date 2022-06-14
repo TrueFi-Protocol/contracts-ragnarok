@@ -34,6 +34,8 @@ echo "}" >> $outputDir/index.ts
 
 echo "export * from './types'" >> $outputDir/index.ts
 
+git rev-parse --is-inside-work-tree || exit 0
+
 if [[ -z "$(git status --porcelain)" ]]; then
     echo "Build canary stored in ${outputDir}/canary.hash"
     git log --pretty=format:'%H' -n 1 > $outputDir/canary.hash
