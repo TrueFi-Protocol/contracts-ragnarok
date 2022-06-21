@@ -12,7 +12,10 @@ export function saveAddressesToFile(addresses: Addresses, deploymentsFile: strin
     console.log('File not found')
   }
 
-  deployments['ganache'] = addresses
+  deployments['ganache'] = {
+    ...deployments['ganache'],
+    ...addresses,
+  }
 
   writeFileSync(deploymentsFile, JSON.stringify(deployments, null, 2) + '\n')
 }
