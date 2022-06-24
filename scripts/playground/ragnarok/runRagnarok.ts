@@ -16,8 +16,8 @@ export async function runRagnarok(overrideProvider?: Web3Provider, deploymentsFi
   const multicall = await new Multicall2__factory(owner).deploy()
   const ragnarokAddresses = await deploy(usdc, owner, protocol)
   saveAddressesToFile({
-    Multicall: { address: multicall.address },
-    MockUsdc: { address: usdc.address },
+    multicall: { address: multicall.address },
+    mockUsdc: { address: usdc.address },
     ...ragnarokAddresses,
   }, deploymentsFile ?? config.deploymentsFile)
   console.log('\n' + 'Ragnarok deployment DONE 🌟')
