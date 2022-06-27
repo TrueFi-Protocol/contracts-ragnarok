@@ -5,7 +5,6 @@ import {
   ManagedPortfolio,
   SignatureOnlyLenderVerifier,
   WhitelistLenderVerifier,
-  LoansReader,
   GlobalWhitelistLenderVerifier,
 } from '../../build/artifacts'
 import {
@@ -24,7 +23,6 @@ deploy({ verify: true }, () => {
   contract(SignatureOnlyLenderVerifier, [config.managedPortfolio.depositMessage])
   contract(GlobalWhitelistLenderVerifier)
   contract(WhitelistLenderVerifier)
-  contract(LoansReader)
   const bulletLoans = deployBulletLoans(borrowerVerifier)
   const protocolConfig = deployProtocolConfig()
   const managedPortfolioImplementation = contract(ManagedPortfolio)

@@ -69,10 +69,6 @@
       "txHash": "0x0cbb3c30eaa909dc5c2d5f7cf119a6864a1f43fb90a55086d468b297f5dc0003",
       "address": "0x47693B6E63eebe8787a23eB9883caCC828641Ac0"
     },
-    "loansReader": {
-      "txHash": "0xf79e51658acea6562391c140d88c938d803f351c19eede34574a224954c09f82",
-      "address": "0x488eAd2660b01d038146e856C85De70EC62DBfE5"
-    },
     "mockUsdc": {
       "txHash": "0x2a3721b97f621d281e406e581cb373a405ebe53925b09111e67fd8cd03db8322",
       "address": "0x31c906B8DAE7cA4dFaeff29d171deA0B2cBE2A4a"
@@ -102,10 +98,6 @@
     "whitelistLenderVerifier": {
       "txHash": "0xe9e28b60de540c4a939577d720527d8d05d1e1686393ed01f935fefd533a2284",
       "address": "0x0A847631f0E4719C29cEc3E7862a11f98980f4eF"
-    },
-    "loansReader": {
-      "txHash": "0x9bdc2dd375f9f7e8917e5a125c9c4f045da2efa65c947091ab85d4c4a5c0d383",
-      "address": "0xE1eC1772De06E9fd0a634713F3d0544340B81C1D"
     },
     "bulletLoans": {
       "txHash": "0xc4ee7c068cc3f3c6775a7389d8fbf3647582e3072ce3b789ef7e3dbc343367d8",
@@ -257,10 +249,6 @@
       "txHash": "0x88260b4f653a3ea00db5fd6bf0a6d7af6754d09e76ed8d7a88fb883b901c991e",
       "address": "0x06D5718c2bB342bf8ad93165578c06C7F1ac0464"
     },
-    "loansReader": {
-      "txHash": "0xcb59ab69a31f0d045b76feec9bb66ca5c6ef60fd1828ec2d4aca348a0a7ca6da",
-      "address": "0x44aA5555dfF7879e9DadDB26B330eD984D406808"
-    },
     "globalWhitelistLenderVerifier": {
       "txHash": "0x84c4557823014746611fa48676ad9fba018267e4b5bea30ac06f1a44892780aa",
       "address": "0xAe48bea8F3FC1696DC8ec75183705CeE1D071B05"
@@ -285,11 +273,6 @@
     "whitelistLenderVerifier": {
       "txHash": "0x4d223390f9cfb81ebef6191ebc125594092a1df1bfd3354d70320b5e9d77ad3b",
       "address": "0xc62059Ff82A0352F2D090aAe7bB59D592B932DE6",
-      "multisig": false
-    },
-    "loansReader": {
-      "txHash": "0xa0d70bbee644f3e9cd0b3ee28e2432c09bbfe4b2a256f605e66313ee4bf9da38",
-      "address": "0x86b2FBd508c1CC3E847A734a95fe7511280BA247",
       "multisig": false
     },
     "bulletLoans": {
@@ -349,11 +332,6 @@
       "address": "0x8b98EDD02C2CF31732E9EeE3eEF7c66EF5Eb9B71",
       "multisig": false
     },
-    "loansReader": {
-      "txHash": "0xe9e2e361037717cbecf0f5870ba5fe4673085cdff409e2214cd2be20e2fdcedd",
-      "address": "0xfbB284169C80fCC04B9Cd77E862cC822A3564127",
-      "multisig": false
-    },
     "bulletLoans": {
       "txHash": "0xa2fa76600a8202f3eeffd5d4d95923a08a01f2f747ab5a5a657c6e15ba9a42dc",
       "address": "0x03f311D9352530584647e8336550dDC8A8Aa2162",
@@ -409,11 +387,6 @@
     "whitelistLenderVerifier": {
       "txHash": "0xd21022d6d926ceffec5ddb0861ac2577233c237a17bd97cd1ff4307f176006f3",
       "address": "0x2FB95c909377DE8bA698842A08465212a4aF3FA3",
-      "multisig": false
-    },
-    "loansReader": {
-      "txHash": "0xb5d6ac98b8dddf59fac006305e93dd2226f5718d29f8224fcbf3e37d0165c5b7",
-      "address": "0xC1a10EaF9282EB763542734dc9e758f0e61B7511",
       "multisig": false
     },
     "bulletLoans": {
