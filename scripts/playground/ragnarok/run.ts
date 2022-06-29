@@ -1,3 +1,3 @@
-import { runRagnarok } from './runRagnarok'
+import { runRagnarokOnly } from './runRagnarok'
 
-runRagnarok()
+runRagnarokOnly()

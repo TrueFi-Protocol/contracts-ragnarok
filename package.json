@@ -15,7 +15,7 @@
     "build:types": "typechain --target ethers-v5 --outDir build/types 'build/*.json' > /dev/null && echo 'Typechain generated'",
     "build:waffle": "pnpm run clean && pnpm run build:sol && pnpm run build:types && bash ./utils/bash/indexBuild.sh",
     "build:verify": "ts-node ./spec/generateConfigs.ts",
-    "build": "pnpm run clean && hardhat compile && bash ./utils/bash/indexBuild.sh",
+    "build": "pnpm run clean && hardhat compile && bash ./utils/bash/indexBuild.sh && mars",
     "test": "mocha 'test/**/*.test.ts'",
     "test:gas-reporter": "REPORT_GAS=true hardhat test",
     "codechecks": "codechecks ../../codechecks.yml",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@codechecks/client": "0.1.13-beta-1",
     "@ethersproject/constants": "^5.5.0",
-    "@ethersproject/providers": "5.5.1",
+    "@ethersproject/providers": "5.6.2",
     "@typechain/ethers-v5": "^10.0.0",
     "@types/argparse": "~2.0.10",
     "@types/chai": "^4.2.11",

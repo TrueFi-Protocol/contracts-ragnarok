@@ -24,3 +24,5 @@ resource_errors.json
 
 # Passed in scripts
 .whitelist.txt
+
+deployments-test.json

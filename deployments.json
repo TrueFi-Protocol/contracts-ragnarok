@@ -1,58 +1,75 @@
 {
   "ganache": {
-    "Multicall": {
-      "address": "0xaC8444e7d45c34110B34Ed269AD86248884E78C7"
+    "mockUsdc": {
+      "txHash": "0xf7af3c2c206f3dea6bb553b6803ea2c2ebf63fbc970ed366d141a91231cd05ea",
+      "address": "0xA193E42526F1FEA8C99AF609dcEabf30C1c29fAA",
+      "multisig": false
     },
-    "MockUsdc": {
-      "address": "0xA193E42526F1FEA8C99AF609dcEabf30C1c29fAA"
-    },
-    "BorrowerSignatureVerifier": {
-      "address": "0x94BA4d5Ebb0e05A50e977FFbF6e1a1Ee3D89299c"
-    },
-    "BulletLoans": {
-      "address": "0xD756fb6A081CC11e7F513C39399DB296b1DE3036"
-    },
-    "ProtocolConfig": {
-      "address": "0xdCCc660F92826649754E357b11bd41C31C0609B9"
-    },
-    "Manageable": {
-      "address": "0x84e924C5E04438D2c1Df1A981f7E7104952e6de1"
-    },
-    "SignatureOnlyLenderVerifier": {
-      "address": "0x6454C9d69a4721feBA60e26A367bD4D56196Ee7c"
-    },
-    "ManagedPortfolio": {
-      "address": "0x2061701b22095418514C0D4a28366C54B1464C17"
-    },
-    "ManagedPortfolioFactory": {
-      "address": "0x0BDb999cFA9c47d6d62323a1905F8Eb7B3c9B119"
+    "multicall2": {
+      "txHash": "0xc0b659cda2ce0e97e6178b2c6574aeea1b4e85f58e0b6a29839f753f3accd109",
+      "address": "0xFDFEF9D10d929cB3905C71400ce6be1990EA0F34",
+      "multisig": false
     },
     "multicall": {
-      "address": "0xaC8444e7d45c34110B34Ed269AD86248884E78C7"
-    },
-    "mockUsdc": {
-      "address": "0xA193E42526F1FEA8C99AF609dcEabf30C1c29fAA"
+      "address": "0xFDFEF9D10d929cB3905C71400ce6be1990EA0F34"
     },
     "borrowerSignatureVerifier": {
-      "address": "0x94BA4d5Ebb0e05A50e977FFbF6e1a1Ee3D89299c"
-    },
-    "bulletLoans_proxy": {
-      "address": "0xD756fb6A081CC11e7F513C39399DB296b1DE3036"
-    },
-    "protocolConfig": {
-      "address": "0xdCCc660F92826649754E357b11bd41C31C0609B9"
-    },
-    "manageable": {
-      "address": "0x84e924C5E04438D2c1Df1A981f7E7104952e6de1"
+      "txHash": "0x01f20bd8aec67ad2db86a96e5d80d24d6a156fe78dc0f2d991416fe16fe0ec37",
+      "address": "0xaC8444e7d45c34110B34Ed269AD86248884E78C7",
+      "multisig": false
     },
     "signatureOnlyLenderVerifier": {
-      "address": "0x6454C9d69a4721feBA60e26A367bD4D56196Ee7c"
+      "txHash": "0x99c500b0a40d1715b2af09d624bb56f13b0113630870072536599939b3f2eeed",
+      "address": "0x94BA4d5Ebb0e05A50e977FFbF6e1a1Ee3D89299c",
+      "multisig": false
+    },
+    "globalWhitelistLenderVerifier": {
+      "txHash": "0x833af26e80dce1333e575147dd484a3edeab995af20e190c7336d42a48b74d02",
+      "address": "0xFf807885934003A35b1284d7445fc83Fd23417e5",
+      "multisig": false
+    },
+    "whitelistLenderVerifier": {
+      "txHash": "0x95cf811811d3e3024ac88010e332d57404d3f90ccd907759bf8bfc050d3d8fb0",
+      "address": "0xD756fb6A081CC11e7F513C39399DB296b1DE3036",
+      "multisig": false
+    },
+    "bulletLoans": {
+      "txHash": "0xf6395d3beb83221f69971c6a5df5d498183d44777fa90fe9eaacbce2a3f5df33",
+      "address": "0x956dA338C1518a7FB213042b70c60c021aeBd554",
+      "multisig": false
+    },
+    "bulletLoans_proxy": {
+      "txHash": "0xe3fa6f59126e7cf4410461e4207e789abe3c517f29d0c4d4456a08e5e91b5d60",
+      "address": "0xdCCc660F92826649754E357b11bd41C31C0609B9",
+      "multisig": false
+    },
+    "protocolConfig": {
+      "txHash": "0xf2ccb27de524a6cb93678b288df177fbe2a9878afc1bfffc5e255de231a55b5b",
+      "address": "0x84e924C5E04438D2c1Df1A981f7E7104952e6de1",
+      "multisig": false
+    },
+    "protocolConfig_proxy": {
+      "txHash": "0xafbd7806400530dfdb14bf4d425d03946ffd35775a3366c090bd9d9a4bdf3334",
+      "address": "0x6454C9d69a4721feBA60e26A367bD4D56196Ee7c",
+      "multisig": false
     },
     "managedPortfolio": {
-      "address": "0x2061701b22095418514C0D4a28366C54B1464C17"
+      "txHash": "0x7c9e8e99ff178e53966a3e8bea95905a62da09aa3447d2300dc673212a7dd922",
+      "address": "0x4E0597863fA1AA7B6b95a887AD9fEee038815642",
+      "multisig": false
+    },
+    "managedPortfolioFactory": {
+      "txHash": "0x66883580c2ad261ed19e1ad55c71c35ce60ad1f4c81c70ad6f6a5ce6737b0080",
+      "address": "0x2061701b22095418514C0D4a28366C54B1464C17",
+      "multisig": false
     },
     "managedPortfolioFactory_proxy": {
-      "address": "0x0BDb999cFA9c47d6d62323a1905F8Eb7B3c9B119"
+      "txHash": "0x1e7039c9ed48abf62725d54fdbab0b0f83d165b8363bc69aafe787e24024ec2a",
+      "address": "0x1C1d9066A35993d5a5BDA1e7290Ce1898963EBBC",
+      "multisig": false
+    },
+    "managedPortfolio_proxy": {
+      "address": "0xF84F84Fd2650105d004FD468A74f29E396E3e71a"
     }
   },
   "ropsten": {

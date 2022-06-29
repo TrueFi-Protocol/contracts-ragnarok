@@ -1,33 +1,32 @@
-import { Wallet } from 'ethers'
-import {
-  deployBulletLoans,
-  deployProtocolConfig,
-  deployManagedPortfolio,
-  deployManageable,
-  deployManagedPortfolioFactory,
-  deploySignatureOnlyLenderVerifier,
-  deployBorrowerSignatureVerifier,
-} from './tasks'
-import { MockUsdc } from '../../../build/types'
+import { Options, deploy, contract, saveContract } from 'ethereum-mars'
+import { JsonRpcProvider } from '@ethersproject/providers'
+import { deployRagnarok } from '../../deployment/deployRagnarok'
+import { MockUsdc, Multicall2 } from '../../../build/artifacts'
+import { defaultAccounts } from 'ethereum-waffle'
+import { Address } from 'ethereum-mars/build/src/symbols'
 
-export async function deploy(usdc: MockUsdc, owner: Wallet, protocol: Wallet) {
-  const borrowerSignatureVerifier = await deployBorrowerSignatureVerifier(owner)
-  const bulletLoans = await deployBulletLoans(owner, borrowerSignatureVerifier)
-  const protocolConfig = await deployProtocolConfig(owner, protocol)
-  const manageable = await deployManageable(owner)
-  const lenderVerifier = await deploySignatureOnlyLenderVerifier(owner)
-  const managedPortfolio = await deployManagedPortfolio(owner, usdc, bulletLoans, protocolConfig, lenderVerifier)
-  const managedPortfolioFactory = await deployManagedPortfolioFactory(owner, bulletLoans, protocolConfig)
-  await managedPortfolioFactory.setIsWhitelisted(owner.address, true)
+const getOptions = (privateKey: string, provider: JsonRpcProvider, deploymentsFile: string): Options => ({
+  privateKey,
+  network: provider,
+  noConfirm: true,
+  verify: false,
+  disableCommandLineOptions: true,
+  outputFile: deploymentsFile,
+})
 
-  const addresses = {
-    borrowerSignatureVerifier: { address: borrowerSignatureVerifier.address },
-    bulletLoans_proxy: { address: bulletLoans.address },
-    protocolConfig: { address: protocolConfig.address },
-    manageable: { address: manageable.address },
-    signatureOnlyLenderVerifier: { address: lenderVerifier.address },
-    managedPortfolio: { address: managedPortfolio.address },
-    managedPortfolioFactory_proxy: { address: managedPortfolioFactory.address },
-  }
-  return addresses
+export function deployRagnarokPlayground(privateKey: string, provider: JsonRpcProvider, deploymentsFile: string) {
+  const options = getOptions(privateKey, provider, deploymentsFile)
+  return deploy(options, (deployer, executeOptions) => {
+    deployRagnarok(deployer, executeOptions)
+  })
+}
+
+export function deployHelperContracts(provider: JsonRpcProvider, deploymentsFile: string) {
+  const { secretKey } = defaultAccounts[0]
+  const options = getOptions(secretKey, provider, deploymentsFile)
+  return deploy(options, () => {
+    contract(MockUsdc)
+    const multicall = contract(Multicall2)
+    saveContract('multicall', multicall[Address])
+  })
 }
