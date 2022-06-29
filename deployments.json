@@ -26,6 +26,33 @@
     },
     "ManagedPortfolioFactory": {
       "address": "0x0BDb999cFA9c47d6d62323a1905F8Eb7B3c9B119"
+    },
+    "multicall": {
+      "address": "0xaC8444e7d45c34110B34Ed269AD86248884E78C7"
+    },
+    "mockUsdc": {
+      "address": "0xA193E42526F1FEA8C99AF609dcEabf30C1c29fAA"
+    },
+    "borrowerSignatureVerifier": {
+      "address": "0x94BA4d5Ebb0e05A50e977FFbF6e1a1Ee3D89299c"
+    },
+    "bulletLoans_proxy": {
+      "address": "0xD756fb6A081CC11e7F513C39399DB296b1DE3036"
+    },
+    "protocolConfig": {
+      "address": "0xdCCc660F92826649754E357b11bd41C31C0609B9"
+    },
+    "manageable": {
+      "address": "0x84e924C5E04438D2c1Df1A981f7E7104952e6de1"
+    },
+    "signatureOnlyLenderVerifier": {
+      "address": "0x6454C9d69a4721feBA60e26A367bD4D56196Ee7c"
+    },
+    "managedPortfolio": {
+      "address": "0x2061701b22095418514C0D4a28366C54B1464C17"
+    },
+    "managedPortfolioFactory_proxy": {
+      "address": "0x0BDb999cFA9c47d6d62323a1905F8Eb7B3c9B119"
     }
   },
   "ropsten": {
