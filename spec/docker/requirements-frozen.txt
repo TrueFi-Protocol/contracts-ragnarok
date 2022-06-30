@@ -1,0 +1,2 @@
+certora-cli==3.1.0
+solc-select==0.2.1

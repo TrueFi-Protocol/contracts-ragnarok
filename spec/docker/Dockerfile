@@ -24,7 +24,7 @@ ADD ./build/package-extracted-deps.json package.json
 ADD patches patches
 RUN pnpm install && rm package.json
 
-ADD ./build/requirements-frozen.txt requirements.txt
+ADD ./spec/docker/requirements-frozen.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 ADD spec/docker/setup.sh .
@@ -36,4 +36,4 @@ ADD contracts contracts
 ADD spec spec
 ADD package.json .
 
-ENTRYPOINT [ "bash", "/root/spec/docker/run.sh" ]
+ENTRYPOINT [ "certoraRun" ]
