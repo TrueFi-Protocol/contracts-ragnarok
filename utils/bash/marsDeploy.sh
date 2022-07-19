@@ -89,4 +89,5 @@ pnpm mars
 ts-node ${DEPLOY_SCRIPT} \
   --waffle-config ./.waffle.json \
   ${args} \
+  --out-file "deployments-${network}.json" \
   --log "./cache/deploy${network_log}${target_log}${dry_run_log}${timestamp_log}.log"

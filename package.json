@@ -23,7 +23,7 @@
     "verify": "bash ./spec/verify.sh",
     "verify:sanity": "bash ./spec/verify.sh -s",
     "playground": "ts-node ./scripts/playground/ragnarok/run.ts",
-    "deploy": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts -o deployments.json",
+    "deploy": "bash ./utils/bash/marsDeploy.sh scripts/deployment/ragnarok.ts",
     "deploy:dryrun": "pnpm run deploy --dry-run --yes",
     "slither": "./slither.sh",
     "coverage": "bash ./utils/bash/runCoverage.sh",
