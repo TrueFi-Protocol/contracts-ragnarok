@@ -1,7 +1,7 @@
 import { safeReadJsonFile, writeJsonFile } from '../utils'
 import { existsSync, mkdirSync } from 'fs'
 
-function mergeDeployment() {
+function mergeDeployments() {
   if (!existsSync('./build')) {
     mkdirSync('./build')
   }
@@ -17,4 +17,4 @@ function mergeDeployment() {
   writeJsonFile('build/deployments.json', merged)
 }
 
-mergeDeployment()
+mergeDeployments()

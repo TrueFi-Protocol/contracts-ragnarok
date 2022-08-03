@@ -74,7 +74,7 @@
     "@typechain/hardhat": "^6.0.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
     "ethereum-mars": "0.2.5",
-    "ethereum-waffle": "4.0.0-alpha.21",
+    "ethereum-waffle": "4.0.4",
     "ethers": "5.6.2",
     "hardhat": "^2.9.2",
     "solc": "^0.8.12",
