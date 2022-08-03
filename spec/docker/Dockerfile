@@ -21,7 +21,6 @@ RUN npm install -g pnpm@6.20.3
 WORKDIR /root
 
 ADD ./build/package-extracted-deps.json package.json
-ADD patches patches
 RUN pnpm install && rm package.json
 
 ADD ./spec/docker/requirements-frozen.txt requirements.txt

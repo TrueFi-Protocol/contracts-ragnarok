@@ -35,7 +35,7 @@ describe('deployRagnarok', () => {
   }
 
   it('generates deployments file as in repo', async () => {
-    const expected = safeReadJsonFile('deployments.json').ganache
+    const expected = safeReadJsonFile('deployments-ganache.json').ganache
     const deploymentsTestFile = 'deployments-test.json'
     if (existsSync(deploymentsTestFile)) {
       unlinkSync(deploymentsTestFile)

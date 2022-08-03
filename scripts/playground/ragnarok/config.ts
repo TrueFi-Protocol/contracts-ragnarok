@@ -2,7 +2,7 @@ import { env } from '../../common/env'
 import { config as deploymentConfig } from '../../deployment/ragnarok/config'
 
 export const config = {
-  deploymentsFile: 'deployments.json',
+  deploymentsFile: 'build/deployments.json',
   managedPortfolio: {
     duration: env('MANAGED_PORTFOLIO_DURATION', 365 * 24 * 60 * 60), // 1 year,
     maxSize: env('MANAGED_PORTFOLIO_MAX_SIZE', 1e7),
