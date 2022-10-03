@@ -18,7 +18,7 @@ extract_version() {
 build_docker() {
     mkdir -p build
 
-    jq '{ dependencies, devDependencies }' package.json > ./build/package-extracted-deps.json
+    jq '{ dependencies: (.dependencies // {}), devDependencies: (.devDependencies // {}) }' package.json > ./build/package-extracted-deps.json
 
     docker build -f spec/docker/Dockerfile . -t verify_ragnarok
 }
