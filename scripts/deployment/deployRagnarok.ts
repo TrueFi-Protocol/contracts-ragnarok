@@ -1,6 +1,4 @@
-import { contract, ExecuteOptions, Future, saveContract } from 'ethereum-mars'
-import { makeContractInstance } from 'ethereum-mars/build/src/syntax/contract'
-import { readContractAddress } from '../utils'
+import { contract, ExecuteOptions, saveContract } from 'ethereum-mars'
 import {
   BorrowerSignatureVerifier,
   ManagedPortfolio,
@@ -18,7 +16,7 @@ import {
 
 const { duration, maxSize, managerFee, depositMessage } = config.managedPortfolio
 
-export function deployRagnarok(deployer: string, { networkName, deploymentsFile }: ExecuteOptions) {
+export function deployRagnarok(deployer: string, { networkName }: ExecuteOptions) {
   const borrowerVerifier = contract(BorrowerSignatureVerifier)
   const signatureOnlyLenderVerifier = contract(SignatureOnlyLenderVerifier, [depositMessage])
   const globalWhitelistLenderVerifier = contract(GlobalWhitelistLenderVerifier)
@@ -29,8 +27,7 @@ export function deployRagnarok(deployer: string, { networkName, deploymentsFile 
   const managedPortfolioFactory = deployManagedPortfolioFactory(bulletLoans, protocolConfig, managedPortfolioImplementation)
 
   const deployTestnetContracts = () => {
-    const usdcAddress = readContractAddress(deploymentsFile, networkName, 'mockUsdc')
-    const usdc = makeContractInstance('mockUsdc', MockUsdc, new Future(() => usdcAddress))
+    const usdc = contract('mockUsdc', MockUsdc, [], { skipUpgrade: true })
     managedPortfolioFactory.setIsWhitelisted(deployer, true)
     managedPortfolioFactory.createPortfolio('Managed Portfolio', 'MP', usdc, signatureOnlyLenderVerifier, duration, maxSize, managerFee)
     const managedPortfolio = managedPortfolioFactory.getPortfolios().map(portfolios => portfolios[portfolios.length - 1])
