@@ -11,6 +11,7 @@ function mergeDeployments() {
   merged['ganache'] = safeReadJsonFile('deployments-ganache.json')['ganache']
   merged['goerli'] = safeReadJsonFile('deployments-goerli.json')['goerli']
   merged['optimism_kovan'] = safeReadJsonFile('deployments-optimism_kovan.json')['optimism_kovan']
+  merged['optimism_goerli'] = safeReadJsonFile('deployments-optimism_goerli.json')['optimism_goerli']
   merged['optimism'] = safeReadJsonFile('deployments-optimism.json')['optimism']
   merged['rinkeby'] = safeReadJsonFile('deployments-rinkeby.json')['rinkeby']
   merged['ropsten'] = safeReadJsonFile('deployments-ropsten.json')['ropsten']
