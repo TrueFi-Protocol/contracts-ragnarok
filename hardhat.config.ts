@@ -12,7 +12,7 @@ module.exports = {
   paths: {
     sources: './contracts',
     artifacts: './build',
-    cache: './cache',
+    cache: './build',
   },
   abiExporter: {
     path: './build',
