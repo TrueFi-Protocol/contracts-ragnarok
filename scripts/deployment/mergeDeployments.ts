@@ -13,7 +13,6 @@ function mergeDeployments() {
   merged['optimism_goerli'] = safeReadJsonFile('deployments-optimism_goerli.json')['optimism_goerli']
   merged['optimism'] = safeReadJsonFile('deployments-optimism.json')['optimism']
   merged['rinkeby'] = safeReadJsonFile('deployments-rinkeby.json')['rinkeby']
-  merged['ropsten'] = safeReadJsonFile('deployments-ropsten.json')['ropsten']
   writeJsonFile('build/deployments.json', merged)
 }
 

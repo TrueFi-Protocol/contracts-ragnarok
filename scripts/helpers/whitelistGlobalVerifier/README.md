@@ -13,7 +13,7 @@ To run the script type: `pnpm run whitelist:global` and pass proper arguments:
 - `whitelist-contract (-w)` - address of GlobalWhitelistLenderVerifier contract
 - `batch-size (-b)` - (optional) number of addresses whitelisted in one transaction
 
-For example: `pnpm run whitelist:global -- -n ropsten -w 0xbC0f50Fb1f782982441c405890dC638e0CfAF0d9`
+For example: `pnpm run whitelist:global -- -n goerli -w 0xbC0f50Fb1f782982441c405890dC638e0CfAF0d9`
 
 You also need to have `.env` file in `/whitelistGlobalVerifier` with private key of GlobalWhitelistLenderVerifier manager specified in `PRIVATE_KEY` variable.
 

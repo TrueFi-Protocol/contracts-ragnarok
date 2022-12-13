@@ -14,7 +14,7 @@ const MULTICALL2_ABI = [
   'function tryAggregate(bool requireSuccess, tuple(address target, bytes callData)[] calls) public view returns (tuple(bool success, bytes returnData)[])',
 ]
 
-// it's the same address for Mainnet, Ropsten and Rinkeby
+// it's the same address for Mainnet, Goerli and Rinkeby
 const MULTICALL2_ADDRESS = '0x5ba1e12693dc8f9c48aad8770482f4739beed696'
 
 const ADDRESSES_PATH = path.join(__dirname, '.whitelist.txt')

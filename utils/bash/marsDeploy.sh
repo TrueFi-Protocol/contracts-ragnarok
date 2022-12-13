@@ -8,7 +8,7 @@ export INFURA_KEY="f88abc181a4a45a6bc47bdda05a94944"
 export ETHERSCAN_KEY="RPKYAHCE6R2YI7TRV51WS5N8R885RRNXG3"
 
 # Example usage:
-# $ ./utils/bash/marsDeploy.sh deploy/truefi.ts --network ropsten --dry-run
+# $ ./utils/bash/marsDeploy.sh deploy/truefi.ts --network goerli --dry-run
 # PRIVATE_KEY=0x123..64
 
 # Consume the first argument as a path to the Mars deploy script.
