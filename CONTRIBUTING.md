@@ -52,23 +52,23 @@ $ yarn docs
 
 ## Deploying
 
-Feel free to deploy up-to-date `main` contracts to Rinkeby at any time from a
+Feel free to deploy up-to-date `main` contracts to Goerli at any time from a
 clean branch.
 
 1. Test the deployment locally with the `--dry-run` flag to confirm the
 update can succeed:
 
 ```sh
-$ yarn deploy:truefi2 --network rinkeby --dry-run
+$ yarn deploy:truefi2 --network goerli --dry-run
 ```
 
 2. Then deploy and verify the contracts on Etherscan:
 
 ```sh
-$ yarn deploy:truefi2 --network rinkeby --verify
+$ yarn deploy:truefi2 --network goerli --verify
 ```
 
-3. This should update addresses in [deployments-rinkeby.json](deployments-rinkeby.json).
+3. This should update addresses in [deployments-goerli.json](deployments-goerli.json).
 Confirm these updates are correct before submitting a PR with the updates for
 review.
 
