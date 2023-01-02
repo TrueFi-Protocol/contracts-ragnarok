@@ -1,5 +1,5 @@
 import '@typechain/hardhat'
-import '@nomiclabs/hardhat-waffle'
+import 'hardhat-waffle-dev'
 import 'solidity-coverage'
 import './abi-exporter'
 import 'tsconfig-paths/register'
@@ -39,4 +39,8 @@ module.exports = {
   gasReporter: {
     enabled: (process.env.REPORT_GAS) ? true : false,
   },
+  waffle: {
+    skipEstimateGas: '0xB71B00',
+    injectCallHistory: true,
+  }
 }
