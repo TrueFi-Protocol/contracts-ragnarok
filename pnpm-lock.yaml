@@ -367,8 +367,8 @@ importers:
       styled-components: ^5.2.0
       swr: ^1.1.2
       tiny-invariant: ^1.2.0
-      truefi-contracts-helium: ~1.0.0
-      truefi-contracts-ragnarok: ~1.0.0
+      contracts-helium: ~1.0.0
+      contracts-ragnarok: ~1.0.0
       typescript: 4.5.4
       urql: ~2.0.5
       web3: ~1.6.1
@@ -465,8 +465,8 @@ importers:
       styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
       swr: 1.2.2_react@17.0.2
       tiny-invariant: 1.2.0
-      truefi-contracts-helium: link:../contracts-helium
-      truefi-contracts-ragnarok: link:../contracts-ragnarok
+      contracts-helium: link:../contracts-helium
+      contracts-ragnarok: link:../contracts-ragnarok
       typescript: 4.5.4
       urql: 2.0.6_graphql@15.7.2+react@17.0.2
       web3: 1.6.1
