@@ -1,1 +1,1 @@
-export const INFURA_KEY = 'ec659e9f6af4425c8a13aeb0af9f2809'
+export const INFURA_KEY = '5be498e94afe494897c88427fcb3e42a'
