@@ -10,8 +10,9 @@ import {IBulletLoans, BulletLoanStatus} from "./interfaces/IBulletLoans.sol";
 import {IProtocolConfig} from "./interfaces/IProtocolConfig.sol";
 import {ILenderVerifier} from "./interfaces/ILenderVerifier.sol";
 import {InitializableManageable} from "./access/InitializableManageable.sol";
+import {RewardsFlywheel} from "./rewards/RewardsFlywheel.sol";
 
-contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721Receiver, IManagedPortfolio {
+contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721Receiver, IManagedPortfolio, RewardsFlywheel {
     using SafeERC20 for IERC20WithDecimals;
 
     uint256 internal constant YEAR = 365 days;
@@ -73,6 +74,7 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
     ) external initializer {
         InitializableManageable.initialize(_manager);
         ERC20Upgradeable.__ERC20_init(_name, _symbol);
+        initializeRewards();
         underlyingToken = _underlyingToken;
         bulletLoans = _bulletLoans;
         protocolConfig = _protocolConfig;
@@ -80,6 +82,12 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         endDate = block.timestamp + _duration;
         maxSize = _maxSize;
         managerFee = _managerFee;
+    }
+
+    function setDepositRewards(address tokenAddress, address treasuryAddress, uint256 rewardsRate) external onlyManager {
+        setRewardsToken(tokenAddress);
+        setRewardsTreasury(treasuryAddress);
+        setRewardsRate(rewardsRate);
     }
 
     function deposit(uint256 depositAmount, bytes memory metadata) external onlyOpened {
@@ -247,12 +255,28 @@ contract ManagedPortfolio is ERC20Upgradeable, InitializableManageable, IERC721R
         }
     }
 
+    function totalRewardShares() internal view virtual override returns (uint256) {
+        return totalSupply();
+    }
+
+    function rewardSharesFor(address account) internal view virtual override returns (uint256) {
+        return balanceOf(account);
+    }
+
     function _beforeTokenTransfer(
         address from,
         address to,
         uint256
     ) internal virtual override {
         require(from == address(0) || to == address(0), "ManagedPortfolio: transfer of LP tokens prohibited");
+
+        updateRewardsFlywheel();
+
+        if (from != address(0))
+            distributeRewardsFor(from);
+
+        if (to != address(0))
+            distributeRewardsFor(to);
     }
 
     function onERC721Received(
